@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Models.EF.ReviewProduct>
+<div id="loadbinhluan" class="axil-comment-area pro-desc-commnet-area">
+    <h5 class="title">@ViewBag.Count @(StaticRescouces.ResourceUser.danhgiasanpham)</h5>
+    @if (Model != null && Model.Any())
+    {
+        <ul class="comment-list">
+            <!-- Start Single Comment  -->
+            @foreach (var item in Model)
+            {
+                <li class="comment">
+                    <div class="comment-body">
+                        <div class="single-comment">
+                            <div class="comment-img">
+                                <img src="@item.Avatar" style="width:60px;height:60px" alt="Author Images">
+                            </div>
+                            <div class="comment-inner">
+                                <h6 class="commenter">
+                                    <a class="hover-flip-item-wrapper" href="#">
+                                        <span class="hover-flip-item">
+                                            <span data-text="Cameron Williamson">@item.FullName</span>
+                                            <span>@item.CreateDate.ToString("dd/MM/yyyy")</span>
+                                        </span>
+                                    </a>
+                                    <span class="commenter-rating ratiing-four-star">
+                                        @Html.Raw(Models.Common.Common.HtmlRate(item.Rate))
+                                    </span>
+                                </h6>
+                                <div class="comment-text">
+                                    <p>@item.Content </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+            <!-- End Single Comment  -->
+            <!-- Start Single Comment  -->
+
+        </ul>
+    }
+</div>
+<!-- End .axil-commnet-area -->

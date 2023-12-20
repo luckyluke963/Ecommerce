@@ -1,0 +1,721 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="anvaodaydedangnhap" xml:space="preserve">
+    <value>Click here to login</value>
+  </data>
+  <data name="apdung" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="BaiDangThuongXuyen" xml:space="preserve">
+    <value>Post regularly</value>
+  </data>
+  <data name="baiviet" xml:space="preserve">
+    <value>Posts</value>
+  </data>
+  <data name="baivietmoinhat" xml:space="preserve">
+    <value>Latest Posts</value>
+  </data>
+  <data name="Baivietvesanpham" xml:space="preserve">
+    <value>Articles about products</value>
+  </data>
+  <data name="bamvaodaydenhapmacuaban" xml:space="preserve">
+    <value>Click here to enter your code</value>
+  </data>
+  <data name="BanDangTimKiemCaiGi" xml:space="preserve">
+    <value>What are you looking for</value>
+  </data>
+  <data name="binhluan" xml:space="preserve">
+    <value>Add a Review</value>
+  </data>
+  <data name="CacLoaiDanhMuc" xml:space="preserve">
+    <value>Browse by Category</value>
+  </data>
+  <data name="Cacsanpham" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Cacsanphamcuachungtoi" xml:space="preserve">
+    <value>Our products</value>
+  </data>
+  <data name="Cacsanphammoive" xml:space="preserve">
+    <value>New products arrived</value>
+  </data>
+  <data name="Capnhattatcasanpham" xml:space="preserve">
+    <value>Update all products</value>
+  </data>
+  <data name="cauhoithuonggap" xml:space="preserve">
+    <value>Frequently asked questions</value>
+  </data>
+  <data name="chaomungdenwebcuachungtoi" xml:space="preserve">
+    <value>Welcome to our website</value>
+  </data>
+  <data name="ChapNhancho" xml:space="preserve">
+    <value>Accept it</value>
+  </data>
+  <data name="chiase" xml:space="preserve">
+    <value>Share on</value>
+  </data>
+  <data name="Chinhsach" xml:space="preserve">
+    <value>24 hour return policy</value>
+  </data>
+  <data name="chinhsachbaomat" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="chinhsachhoantra24gio" xml:space="preserve">
+    <value>24 hour return policy</value>
+  </data>
+  <data name="chitiettaikhoan" xml:space="preserve">
+    <value>Account details</value>
+  </data>
+  <data name="chungtoiratmongnhanduochoiamtuban" xml:space="preserve">
+    <value>We look forward to hearing from you</value>
+  </data>
+  <data name="chunhat" xml:space="preserve">
+    <value>Sunday: 10am - 6pm</value>
+  </data>
+  <data name="chuyenkhoanquavnpay" xml:space="preserve">
+    <value>Transfer money via VNPAY</value>
+  </data>
+  <data name="cohieusamgia" xml:space="preserve">
+    <value>Have a coupon</value>
+  </data>
+  <data name="ConverTien" xml:space="preserve">
+    <value>@Models.Common.Common.FormatNumber(item.Price/24310, 0))</value>
+  </data>
+  <data name="cua" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="cuahangcuachungtoi" xml:space="preserve">
+    <value>Our store</value>
+  </data>
+  <data name="Dambao" xml:space="preserve">
+    <value>100% guaranteed about the product</value>
+  </data>
+  <data name="Dambaolaitien" xml:space="preserve">
+    <value>Money back guarantee</value>
+  </data>
+  <data name="DangKy" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="DangKyNhanMaGiamGia" xml:space="preserve">
+    <value>Sign up to receive discount codes</value>
+  </data>
+  <data name="dangkytaikhoan" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="dangnhap" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="DangNhapDangky" xml:space="preserve">
+    <value>Log in/ sign up</value>
+  </data>
+  <data name="danhgiacuaban" xml:space="preserve">
+    <value>Đánh giá của bạn</value>
+  </data>
+  <data name="danhgiasanpham" xml:space="preserve">
+    <value>Review for this product</value>
+  </data>
+  <data name="DanhMuc" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="dathang" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="diachi" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="diachiemailcuabansekhongduoccongbo" xml:space="preserve">
+    <value>Your email address will not be published. Required fields are marked</value>
+  </data>
+  <data name="diachigiaohang" xml:space="preserve">
+    <value>Delivery address</value>
+  </data>
+  <data name="diachihanhtoan" xml:space="preserve">
+    <value>Payment address</value>
+  </data>
+  <data name="diachikhongduocrong" xml:space="preserve">
+    <value>Address cannot be empty</value>
+  </data>
+  <data name="diachinguoidung" xml:space="preserve">
+    <value>User address</value>
+  </data>
+  <data name="diaphuong" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="Dichvuchatluong" xml:space="preserve">
+    <value>Quality service</value>
+  </data>
+  <data name="diencode" xml:space="preserve">
+    <value>Enter code</value>
+  </data>
+  <data name="dieukhoansudung" xml:space="preserve">
+    <value>Terms of use</value>
+  </data>
+  <data name="docnhieu" xml:space="preserve">
+    <value>Read More</value>
+  </data>
+  <data name="Docthem" xml:space="preserve">
+    <value>Read more</value>
+  </data>
+  <data name="donhangcuaban" xml:space="preserve">
+    <value>Your order</value>
+  </data>
+  <data name="emailkhongduocrong" xml:space="preserve">
+    <value>Email cannot be empty</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="ghichu" xml:space="preserve">
+    <value>Notes (optional)</value>
+  </data>
+  <data name="Gia" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Giam" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="Giamgia30masudung" xml:space="preserve">
+    <value>30% discount Use code</value>
+  </data>
+  <data name="Giaohang" xml:space="preserve">
+    <value>Fast and safe delivery</value>
+  </data>
+  <data name="Giaohangmienphi" xml:space="preserve">
+    <value>Free delivery</value>
+  </data>
+  <data name="GiaoHangNhanhChongAnToan" xml:space="preserve">
+    <value>Delivery &amp; fast &amp; safe</value>
+  </data>
+  <data name="Giohang" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="giomocua" xml:space="preserve">
+    <value>Open the door</value>
+  </data>
+  <data name="guibinhluan" xml:space="preserve">
+    <value>Submit Comment</value>
+  </data>
+  <data name="guiphanhoi" xml:space="preserve">
+    <value>Send Message</value>
+  </data>
+  <data name="HangKhuyenmai" xml:space="preserve">
+    <value>Sale off</value>
+  </data>
+  <data name="HangMoi" xml:space="preserve">
+    <value>New products</value>
+  </data>
+  <data name="HayKeVedichvucuaban" xml:space="preserve">
+    <value>Tell us about your service..</value>
+  </data>
+  <data name="Hien" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Homnay" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Homqua" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="Hotro" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="hotrochatluongchuyennghiep" xml:space="preserve">
+    <value>Professional quality support</value>
+  </data>
+  <data name="hotrophucvu" xml:space="preserve">
+    <value>24/7 service support.</value>
+  </data>
+  <data name="hovaten" xml:space="preserve">
+    <value>First and last name</value>
+  </data>
+  <data name="hovatenkhongduocrong" xml:space="preserve">
+    <value>Full name cannot be empty</value>
+  </data>
+  <data name="Ketqua" xml:space="preserve">
+    <value>results</value>
+  </data>
+  <data name="Ketquatimkiem" xml:space="preserve">
+    <value>Search Results</value>
+  </data>
+  <data name="Khamphatatcasanpham" xml:space="preserve">
+    <value>Explore all products</value>
+  </data>
+  <data name="Khoiphucmacdinh" xml:space="preserve">
+    <value>Restore default</value>
+  </data>
+  <data name="khongcocauhoi" xml:space="preserve">
+    <value>No questions asked.</value>
+  </data>
+  <data name="khongcosanphamtrongigohang" xml:space="preserve">
+    <value>There are no products in the cart</value>
+  </data>
+  <data name="lienhe" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="lienketnhanh" xml:space="preserve">
+    <value>Quick link</value>
+  </data>
+  <data name="lienvoichungtoi" xml:space="preserve">
+    <value>Contact us</value>
+  </data>
+  <data name="Loc" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Luotxem" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Macdinh" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Macdinhphanloai" xml:space="preserve">
+    <value>Default classification</value>
+  </data>
+  <data name="matkhau" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="matkhaukhongduocrong" xml:space="preserve">
+    <value>Password cannot be empty</value>
+  </data>
+  <data name="matkhaumoi" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="matkhauphaiitnhat" xml:space="preserve">
+    <value>Password must be at least 6 characters</value>
+  </data>
+  <data name="matkhauvamatkhaukhongkhop" xml:space="preserve">
+    <value>The password and confirmation password do not match</value>
+  </data>
+  <data name="mienphi" xml:space="preserve">
+    <value>Free of charge</value>
+  </data>
+  <data name="mienphivanchuyen" xml:space="preserve">
+    <value>Free Shippping</value>
+  </data>
+  <data name="moiquyenduocbaoluuboi" xml:space="preserve">
+    <value>All rights reserved by</value>
+  </data>
+  <data name="Mota" xml:space="preserve">
+    <value>Describe</value>
+  </data>
+  <data name="motacuaban" xml:space="preserve">
+    <value>Your Comment</value>
+  </data>
+  <data name="MuaNgay" xml:space="preserve">
+    <value>Buy now</value>
+  </data>
+  <data name="MuaSanphamnay" xml:space="preserve">
+    <value>Add to cart</value>
+  </data>
+  <data name="neubanchuadangnhapvuilongdangnhaptruoc" xml:space="preserve">
+    <value>If you didn't Logged in, Please Log in first</value>
+  </data>
+  <data name="neubancomagiamgia" xml:space="preserve">
+    <value>If you have a coupon code, please apply it below</value>
+  </data>
+  <data name="neubanconhungsanpham" xml:space="preserve">
+    <value>If you have great products you are creating or would like to partner with us then please contact us</value>
+  </data>
+  <data name="newlist" xml:space="preserve">
+    <value>News list</value>
+  </data>
+  <data name="Nhapcode" xml:space="preserve">
+    <value>Enter coupon code</value>
+  </data>
+  <data name="nhaplaimatkhau" xml:space="preserve">
+    <value>Enter confirmation password</value>
+  </data>
+  <data name="nhaplaimatkhaukhongduocrong" xml:space="preserve">
+    <value>Re-enter the password and cannot be empty</value>
+  </data>
+  <data name="nhaplaimatkhaumoi" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="nhaptaikhoan" xml:space="preserve">
+    <value>Enter account...</value>
+  </data>
+  <data name="nhotoi" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="Phaidungdinhdangemail" xml:space="preserve">
+    <value>Email format must be correct</value>
+  </data>
+  <data name="phanhoikhachhang" xml:space="preserve">
+    <value>Returning customer?</value>
+  </data>
+  <data name="phivanchuyen" xml:space="preserve">
+    <value>Transport fee</value>
+  </data>
+  <data name="quantam" xml:space="preserve">
+    <value>Care about</value>
+  </data>
+  <data name="quenmatkhau" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
+  <data name="quenmetkhau" xml:space="preserve">
+    <value>Quên mật khẩu?</value>
+  </data>
+  <data name="Quytrinhthanhtoan" xml:space="preserve">
+    <value>Payment process</value>
+  </data>
+  <data name="sanpham" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="SanPhamBanChayNhat" xml:space="preserve">
+    <value>Best - selling product</value>
+  </data>
+  <data name="SanPhamChatLuong" xml:space="preserve">
+    <value>Next Level Pro Quality</value>
+  </data>
+  <data name="Sanphamchinhhang" xml:space="preserve">
+    <value>Genuine product</value>
+  </data>
+  <data name="Sanphamlienquan" xml:space="preserve">
+    <value>Related products</value>
+  </data>
+  <data name="sanphamxemganday" xml:space="preserve">
+    <value>Recent Viewed Products</value>
+  </data>
+  <data name="Sanphamyeuthich" xml:space="preserve">
+    <value>Favorite product</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="sodienthoai" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="soluong" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="soluongsanphamconlai" xml:space="preserve">
+    <value>quantity of products remaining in stock</value>
+  </data>
+  <data name="Soluotxemcuakhachhang" xml:space="preserve">
+    <value>Number of customer views</value>
+  </data>
+  <data name="Songuoionline" xml:space="preserve">
+    <value>Number of people online</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>We get it, stuff happens. Just enter your email address below
+and we'll send you a link to reset your password!</value>
+  </data>
+  <data name="String10" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="String11" xml:space="preserve">
+    <value>From your account dashboard, you can view recent orders, manage your shipping and billing addresses, and edit your password and account details.</value>
+  </data>
+  <data name="String12" xml:space="preserve">
+    <value>The following addresses will be used on the checkout page by default.</value>
+  </data>
+  <data name="String13" xml:space="preserve">
+    <value>The following addresses will be used on the checkout page by default</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>Enter email addresss</value>
+  </data>
+  <data name="String3" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="String4" xml:space="preserve">
+    <value>Your email has been sent successfully!</value>
+  </data>
+  <data name="String5" xml:space="preserve">
+    <value>Please check your email to reset your password.</value>
+  </data>
+  <data name="String6" xml:space="preserve">
+    <value>Return to home page</value>
+  </data>
+  <data name="String7" xml:space="preserve">
+    <value>Return to the login page</value>
+  </data>
+  <data name="String8" xml:space="preserve">
+    <value>No account?</value>
+  </data>
+  <data name="String9" xml:space="preserve">
+    <value>Register here!</value>
+  </data>
+  <data name="Stt" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="tags" xml:space="preserve">
+    <value>Tags Category Product</value>
+  </data>
+  <data name="Taiapp" xml:space="preserve">
+    <value>Download the App</value>
+  </data>
+  <data name="TaiKhoan" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="TaiKhoancuatoi" xml:space="preserve">
+    <value>My account</value>
+  </data>
+  <data name="taikhoanhoacmatkhaukhonghople" xml:space="preserve">
+    <value>Invalid account or password</value>
+  </data>
+  <data name="taikhoankhongduocrong" xml:space="preserve">
+    <value>Full name cannot be empty</value>
+  </data>
+  <data name="taikhoannguoidung" xml:space="preserve">
+    <value>User account</value>
+  </data>
+  <data name="tamphi" xml:space="preserve">
+    <value>Temporary fee</value>
+  </data>
+  <data name="tamtinh" xml:space="preserve">
+    <value>provisional</value>
+  </data>
+  <data name="taotaikhoan" xml:space="preserve">
+    <value>Create an Account!</value>
+  </data>
+  <data name="taotaikhoandangky" xml:space="preserve">
+    <value>Create an Account!</value>
+  </data>
+  <data name="TatCa" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="tatcasanpham" xml:space="preserve">
+    <value>All products</value>
+  </data>
+  <data name="tenkhachhnag" xml:space="preserve">
+    <value>Customer name</value>
+  </data>
+  <data name="tensanpham" xml:space="preserve">
+    <value>Product's name</value>
+  </data>
+  <data name="thanhtoanbangtienmat" xml:space="preserve">
+    <value>Payment by cash upon delivery.</value>
+  </data>
+  <data name="thanhtoankhigiaohang" xml:space="preserve">
+    <value>Payment upon delivery</value>
+  </data>
+  <data name="thanhtoanonlinequapaypal" xml:space="preserve">
+    <value>Pay online via Paypal</value>
+  </data>
+  <data name="thanhtoanquapaypal" xml:space="preserve">
+    <value>Payment via Paypal; You can pay by credit card if you don't have a PayPal account</value>
+  </data>
+  <data name="thanhvien" xml:space="preserve">
+    <value>Members of the website sell DV Computer components from date</value>
+  </data>
+  <data name="thayvimuathu" xml:space="preserve">
+    <value>Instead of buying six things, buy one thing you really like</value>
+  </data>
+  <data name="ThemGioHang" xml:space="preserve">
+    <value>Add to card</value>
+  </data>
+  <data name="Thongtinchitiet" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="thongtinnguoidung" xml:space="preserve">
+    <value>User information</value>
+  </data>
+  <data name="thongtinnhanhang" xml:space="preserve">
+    <value>Delivery information</value>
+  </data>
+  <data name="thongtintatcanguoidung" xml:space="preserve">
+    <value>Information for all users</value>
+  </data>
+  <data name="thu2denchu7" xml:space="preserve">
+    <value>Monday to Saturday: 9am - 10pm</value>
+  </data>
+  <data name="Tien" xml:space="preserve">
+    <value>&amp;#36;</value>
+  </data>
+  <data name="Tietkiem3chivoiungdungvanguoidungmoi" xml:space="preserve">
+    <value>Save $3 for new users and apps only</value>
+  </data>
+  <data name="TimKiemSanPham" xml:space="preserve">
+    <value>Search product</value>
+  </data>
+  <data name="tinnhancuaban" xml:space="preserve">
+    <value>Your Message</value>
+  </data>
+  <data name="tintuc" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="tintucxemganday" xml:space="preserve">
+    <value>Recently viewed news</value>
+  </data>
+  <data name="tong" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="tongphu" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="tongquandonhang" xml:space="preserve">
+    <value>Order overview</value>
+  </data>
+  <data name="Tralaidedang" xml:space="preserve">
+    <value>Returns are easy</value>
+  </data>
+  <data name="Trangchu" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="TrongThangNay" xml:space="preserve">
+    <value>This month</value>
+  </data>
+  <data name="TrongTuanNay" xml:space="preserve">
+    <value>In this week</value>
+  </data>
+  <data name="Trongvonggay" xml:space="preserve">
+    <value>Within 10 days.</value>
+  </data>
+  <data name="Tuannay" xml:space="preserve">
+    <value>This week</value>
+  </data>
+  <data name="tygiacodinh" xml:space="preserve">
+    <value>Flat rate</value>
+  </data>
+  <data name="usernmaeenter" xml:space="preserve">
+    <value>Enter username</value>
+  </data>
+  <data name="VietNamese" xml:space="preserve">
+    <value>VietNamese</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website selling computer components DV Computer</value>
+  </data>
+  <data name="Xem" xml:space="preserve">
+    <value>Showing</value>
+  </data>
+  <data name="Xemchitiet" xml:space="preserve">
+    <value>See details</value>
+  </data>
+  <data name="xemsanphamyeuthich" xml:space="preserve">
+    <value>View favorite products</value>
+  </data>
+  <data name="XemTatCa" xml:space="preserve">
+    <value>View All Products</value>
+  </data>
+  <data name="Xemtatcacacsanpham" xml:space="preserve">
+    <value>View all products</value>
+  </data>
+  <data name="xinchao" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="Xoatatcasanphamtronggiohang" xml:space="preserve">
+    <value>Delete all products in the cart</value>
+  </data>
+</root>

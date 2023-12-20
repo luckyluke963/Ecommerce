@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Models.EF.ProductCategory>
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            @*if ((currentLanguage == "vi" && item.Language == "vi") ||
+               (currentLanguage == "en" && item.Language == "en"))
+            {
+                if (ViewBag.CateId == item.Id)
+                {
+                <li class="current-cat"><a href="/danh-muc-san-pham/@item.Alias-@(item.Id)">@item.Title</a></li>
+                }
+                else
+                {
+                <li><a href="/danh-muc-san-pham/@item.Alias-@(item.Id)">@item.Title</a></li>
+                }
+            }*@
+            if ((currentLanguage == "vi"))
+            {
+                if (ViewBag.CateId == item.Id)
+                {
+                    <li class="current-cat"><a href="/danh-muc-san-pham/@item.Alias-@(item.Id)">@item.Title</a></li>
+                }
+                else
+                {
+                    <li><a href="/danh-muc-san-pham/@item.Alias-@(item.Id)">@item.Title</a></li>
+                }
+            }
+            else
+            {
+                if (ViewBag.CateId == item.Id)
+                {
+                    <li class="current-cat"><a href="/danh-muc-san-pham/@item.Alias-@(item.Id)">@item.SeoTile</a></li>
+                }
+                else
+                {
+                    <li><a href="/danh-muc-san-pham/@item.Alias-@(item.Id)">@item.SeoTile</a></li>
+                }
+            }
+        }
+
+        @*<li><a href="#">Night Care</a></li>
+        <li><a href="#">Treatments</a></li>
+        <li><a href="#">Moisturizers</a></li>
+        <li><a href="#">Eye Care</a></li>
+        <li><a href="#">Masks</a></li>
+        <li><a href="#">Featured</a></li>
+        <li><a href="#">On Sale</a></li>*@
+    </ul>
+}
+
+
+

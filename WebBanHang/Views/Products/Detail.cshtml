@@ -1,0 +1,376 @@
+﻿@model Models.EF.Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+@if (Model != null)
+{
+    <br />
+
+
+    <br />
+    <br />
+
+    <br />
+    <!-- Start Breadcrumb Area  -->
+    <div class="axil-breadcrumb-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="inner">
+                        <ul class="axil-breadcrumb">
+                            <li class="axil-breadcrumb-item"><a href="/">@StaticRescouces.ResourceUser.Trangchu</a></li>
+                            <li class="separator"></li>
+                            @if ((currentLanguage == "vi"))
+                            {
+                                <li class="axil-breadcrumb-item"><a href="/danh-muc-san-pham/@Model.ProductCategory.Alias-@Model.ProductCategoryId">@Model.ProductCategory.Title</a></li>
+                            }
+                            else
+                            {
+                                <li class="axil-breadcrumb-item"><a href="/danh-muc-san-pham/@Model.ProductCategory.Alias-@Model.ProductCategoryId">@Model.ProductCategory.SeoTile</a></li>
+                            }
+
+                            <li class="separator"></li>
+                            <li class="axil-breadcrumb-item active" aria-current="page">@Model.Title</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4">
+                    <div class="inner">
+                        <div class="bradcrumb-thumb">
+                            <img src="~/Content/User/assets/images/product/product-45.png" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb Area  -->
+    <!-- Start Shop Area  -->
+    <div class="axil-single-product-area axil-section-gap pb--0 bg-color-white">
+        <div class="single-product-thumb mb--40">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 mb--40">
+                        @if (Model.ProductImage != null && Model.ProductImage.Any())
+                        {
+                            <div class="row">
+                                <div class="col-lg-10 order-lg-2">
+                                    <div class="single-product-thumbnail-wrap zoom-gallery">
+                                        <div class="single-product-thumbnail product-large-thumbnail-3 axil-product">
+                                            @foreach (var item in Model.ProductImage.OrderBy(x => !x.IsDefaul))
+                                            {
+                                                <div class="thumbnail">
+                                                    <a href="@item.image" class="popup-zoom">
+                                                        <img src="@item.image" alt="">
+                                                    </a>
+                                                </div>
+                                            }
+
+
+                                        </div>
+                                        <div class="label-block">
+                                            @*@if (Model.PriceSale > 0)
+                                                {
+
+                                                    <div class="product-badget"> @(Math.Round((double)((Model.Price - Model.PriceSale) / Model.Price * 100), 0))% OFF</div>
+                                                }*@
+
+                                            @if (Model.Price != 0)
+                                            {
+                                                if (Model.PriceSale > 0)
+                                                {
+                                                    <div class="product-badget">
+                                                        <span>@(Math.Round((double)((Model.Price - Model.PriceSale) / Model.Price * 100), 0))% @StaticRescouces.ResourceUser.Giam</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="product-badget">
+                                                        <span>N/A</span> <!-- Handle the case where item.PriceSale is not greater than 0 -->
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="product-badget">
+                                                    <span>N/A</span> <!-- Handle the case where item.Price is zero -->
+                                                </div>
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 order-lg-1">
+                                    <div class="product-small-thumb-3 small-thumb-wrapper">
+                                        @foreach (var item in Model.ProductImage.OrderBy(x => !x.IsDefaul))
+                                        {
+                                            if (item.IsDefaul)
+                                            {
+                                                <div class="small-thumb-img active">
+                                                    <img src="@item.image" alt="thumb image">
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="small-thumb-img">
+                                                    <img src="@item.image" alt="thumb image">
+                                                </div>
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-lg-5 mb--40">
+                        <div class="single-product-content">
+                            <div class="inner">
+                                <h2 class="product-title">@Model.Title</h2>
+                                @if ((currentLanguage == "vi"))
+                                {
+                                    if (Model.PriceSale > 0)
+                                    {
+                                        <span class="price-amount">@Models.Common.Common.FormatNumber(Model.PriceSale, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien) - <span class="price current-price" style="text-decoration: line-through;">@Models.Common.Common.FormatNumber(Model.Price, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span></span>
+                                        @*<span class="price current-price" style="text-decoration: line-through;">@Models.Common.Common.FormatNumber(Model.Price, 0) &#8363;</span>*@
+                                    }
+                                    else
+                                    {
+                                        <span class="price-amount">@Models.Common.Common.FormatNumber(Model.Price, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+                                    }
+                                }
+                                else
+                                {
+                                    if (Model.PriceSale > 0)
+                                    {
+                                        <span class="price-amount">@Models.Common.Common.FormatNumber(Model.PriceSale / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien) - <span class="price current-price" style="text-decoration: line-through;">@Models.Common.Common.FormatNumber(Model.Price / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span></span>
+                                        @*<span class="price current-price" style="text-decoration: line-through;">@Models.Common.Common.FormatNumber(Model.Price, 0) &#8363;</span>*@
+                                    }
+                                    else
+                                    {
+                                        <span class="price-amount">@Models.Common.Common.FormatNumber(Model.Price /24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+                                    }
+                                }
+
+                                <div class="product-rating">
+                                    <div class="star-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <div class="review-link">
+                                        <a href="#">(<span>@Model.ViewCount</span> @StaticRescouces.ResourceUser.Soluotxemcuakhachhang)</a>
+                                    </div>
+                                </div>
+                                <ul class="product-meta">
+                                    <li><i class="fal fa-check"></i>@Model.Quantity @StaticRescouces.ResourceUser.soluongsanphamconlai </li> @*In stock*@
+                                    <li><i class="fal fa-check"></i>@StaticRescouces.ResourceUser.Giaohangmienphi</li>
+                                    <li><i class="fal fa-check"></i>@StaticRescouces.ResourceUser.Giamgia30masudung: @Model.ProductCode</li>
+                                </ul>
+                                <p class="description">@Model.Description</p>
+
+
+                                <!-- Start Product Action Wrapper  -->
+                                <div class="product-action-wrapper d-flex-center">
+                                    <!-- Start Quentity Action  -->
+                                    <div class="pro-qty"><input id="quantity_value" type="text" value="1"></div>
+
+                                    <!-- End Quentity Action  -->
+                                    <!-- Start Product Action  -->
+                                    <ul class="product-action d-flex-center mb--0">
+                                        <li class="add-to-cart"><a href="#" class="axil-btn btn-bg-primary btnAddToCartasd" data-id="@Model.Id">@StaticRescouces.ResourceUser.ThemGioHang</a></li>
+                                        <li class="wishlist"><a href="wishlist.html" class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
+                                    </ul>
+                                    <!-- End Product Action  -->
+
+                                </div>
+                                <!-- End Product Action Wrapper  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End .single-product-thumb -->
+
+        <div class="woocommerce-tabs wc-tabs-wrapper bg-vista-white">
+            <div class="container">
+                <ul class="nav tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">@StaticRescouces.ResourceUser.Mota</a>
+                    </li>
+                    <li class="nav-item " role="presentation">
+                        <a id="additional-info-tab" data-bs-toggle="tab" href="#additional-info" role="tab" aria-controls="additional-info" aria-selected="false">@StaticRescouces.ResourceUser.Thongtinchitiet</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">@StaticRescouces.ResourceUser.Luotxem (@ViewBag.CountReview)</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <div class="product-desc-wrapper">
+                            <div class="row">
+                                @Html.Raw(Model.Detail)
+                            </div>
+                            <!-- End .row -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ul class="pro-des-features">
+                                        <li class="single-features">
+                                            <div class="icon">
+                                                <img src="~/Content/User/assets/images/product/product-thumb/icon-3.png" alt="icon">
+                                            </div>
+                                            @StaticRescouces.ResourceUser.Tralaidedang
+                                        </li>
+                                        <li class="single-features">
+                                            <div class="icon">
+                                                <img src="~/Content/User/assets/images/product/product-thumb/icon-2.png" alt="icon">
+                                            </div>
+                                            @StaticRescouces.ResourceUser.Dichvuchatluong
+                                        </li>
+                                        <li class="single-features">
+                                            <div class="icon">
+                                                <img src="~/Content/User/assets/images/product/product-thumb/icon-1.png" alt="icon">
+                                            </div>
+                                            @StaticRescouces.ResourceUser.Sanphamchinhhang
+                                        </li>
+                                    </ul>
+                                    <!-- End .pro-des-features -->
+                                </div>
+                            </div>
+                            <!-- End .row -->
+                        </div>
+                        <!-- End .product-desc-wrapper -->
+                    </div>
+                    <div class="tab-pane fade" id="additional-info" role="tabpanel" aria-labelledby="additional-info-tab">
+                        <div class="product-additional-info">
+                            <div class="table-responsive">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Stand Up</th>
+                                            <td>35″L x 24″W x 37-45″H(front to back wheel)</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Folded (w/o wheels) </th>
+                                            <td>32.5″L x 18.5″W x 16.5″H</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Folded (w/ wheels) </th>
+                                            <td>32.5″L x 24″W x 18.5″H</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Door Pass Through </th>
+                                            <td>24</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Frame </th>
+                                            <td>Aluminum</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Weight (w/o wheels) </th>
+                                            <td>20 LBS</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Weight Capacity </th>
+                                            <td>60 LBS</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Width</th>
+                                            <td>24″</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Handle height (ground to handle) </th>
+                                            <td>37-45″</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Wheels</th>
+                                            <td>Aluminum</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Size</th>
+                                            <td>S, M, X, XL</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        <div class="reviews-wrapper">
+                            <div class="row">
+                                <div class="col-lg-6 mb--40">
+                                    @Html.Action("_Load_Review", "Review", new { productId = Model.Id })
+                                </div>
+                                <div class="col-lg-6 mb--40">
+                                    @Html.Action("Review", "Review", new { productId = Model.Id })
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- woocommerce-tabs -->
+
+    </div>
+    <!-- End Shop Area  -->
+    <!-- Start Recently Viewed Product Area  -->
+    @Html.Action("Paritail_Relatedproducts", "Products")
+    <!-- End Recently Viewed Product Area  -->
+    <!-- Start Axil Newsletter Area  -->
+    @Html.Action("Partial_subcrice", "Home")
+    <!-- End Axil Newsletter Area  -->
+
+}
+@section scripts{
+    <link href="~/Content/User/Cateogry/styles/single_styles.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            function initStarRatingForNewClass() {
+                if ($('.user_star_rating li').length) {
+                    var stars = $('.user_star_rating li');
+                    var dem = 0;
+                    stars.each(function () {
+                        var star = $(this);
+
+                        star.on('click', function () {
+                            var i = star.index();
+                            dem = 0;
+                            stars.find('i').each(function () {
+                                $(this).removeClass('fa');
+                                $(this).addClass('fal');
+                            });
+                            for (var x = 0; x <= i; x++) {
+                                $(stars[x]).find('i').removeClass('fal');
+                                $(stars[x]).find('i').addClass('fa');
+                                dem++;
+
+                            };
+                            $('#txtRate').val(dem);
+                            console.log(dem);
+                        });
+                    });
+                }
+            }
+
+            // Gọi hàm initStarRatingForNewClass khi tài liệu đã sẵn sàng.
+            initStarRatingForNewClass();
+        });
+    </script>
+
+}
+
+
+

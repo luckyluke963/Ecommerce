@@ -1,0 +1,110 @@
+﻿@model Models.EF.ReviewProduct
+
+
+@using (Ajax.BeginForm("PostReview", "Review", new AjaxOptions
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "load_review",
+    OnSuccess = "OnSuccessRE",
+    OnFailure = "OnFailureRE",
+    OnBegin = "OnBeginRE"
+}, new { @Id = "review_form" }))
+{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function OnBeginRE() {
+            $('#btnCheckOut').attr("disabled", "disabled");
+            $('#load_send').html('<h2>Đang gửi.....</h2>');
+        }
+        function OnSuccessRE(res) {
+            if (res.Success) {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bình luận  thành công', // You can customize this message
+                    showConfirmButton: false,
+                    timer: 1500,
+                    
+                });
+                $("#review_form")[0].reset();
+
+
+
+
+            }
+        }
+
+    </script>
+
+    @Html.AntiForgeryToken()
+
+
+    <!-- End .col -->
+
+    <!-- Start Comment Respond  -->
+    <div class="comment-respond pro-des-commend-respond mt--0">
+        <h5 class="title mb--30">@StaticRescouces.ResourceUser.binhluan</h5>
+        <p>@StaticRescouces.ResourceUser.diachiemailcuabansekhongduoccongbo *</p>
+        <input type="text" id="txtRate" name="Rate" value="4" style="visibility:hidden;" />
+        <div class="rating-wrapper d-flex-center mb--40">
+            @StaticRescouces.ResourceUser.danhgiacuaban :
+            @*<div class="reating-inner ml--20">
+                    <a href="#"><i class="fal fa-star"></i></a>
+                    <a href="#"><i class="fal fa-star"></i></a>
+                    <a href="#"><i class="fal fa-star"></i></a>
+                    <a href="#"><i class="fal fa-star"></i></a>
+                    <a href="#"><i class="fal fa-star"></i></a>
+                </div>*@
+
+            <ul class="user_star_rating reating-inner ml--20">
+                <li><i class="fal fa-star" aria-hidden="true"></i></li>
+                <li><i class="fal fa-star" aria-hidden="true"></i></li>
+                <li><i class="fal fa-star" aria-hidden="true"></i></li>
+                <li><i class="fal fa-star" aria-hidden="true"></i></li>
+                <li><i class="fal fa-star" aria-hidden="true"></i></li>
+            </ul>
+
+        </div>
+
+        <form action="#">
+            <div class="row">
+                @Html.HiddenFor(x => x.UserName)
+                @Html.HiddenFor(x => x.Avatar)
+                @Html.HiddenFor(x => x.ProductId, new { @value = ViewBag.ProductId })
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>@StaticRescouces.ResourceUser.binhluan</label>
+                        @Html.TextAreaFor(x => x.Content, new { @placeholder = StaticRescouces.ResourceUser.motacuaban })
+                        @*<textarea name="message" ></textarea>*@
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="form-group">
+                        <label>@StaticRescouces.ResourceUser.hovaten <span class="require">*</span></label>
+                        @Html.TextBoxFor(x => x.FullName, new { @placeholder = StaticRescouces.ResourceUser.hovaten, @id = "review_name" })
+                        @*<input id="name" type="text">*@
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="form-group">
+                        <label>Email <span class="require">*</span> </label>
+                        @Html.TextBoxFor(x => x.Email, new { @placeholder = "Email", @id = "review_email" })
+                        @*<input id="email" type="email">*@
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-submit">
+                        <button type="submit" id="submit" class="axil-btn btn-bg-primary w-auto">@StaticRescouces.ResourceUser.guibinhluan</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- End Comment Respond  -->
+
+    <!-- End .col -->
+
+
+
+
+}

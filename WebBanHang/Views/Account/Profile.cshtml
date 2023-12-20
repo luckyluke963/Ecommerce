@@ -1,0 +1,463 @@
+﻿@model Models.EF.CreateAccountViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+@if (TempData["message"] != null)
+{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        toastr.error('@TempData["message"]','Lỗi');
+
+    });
+    </script>
+
+
+}
+
+@if (TempData["success"] != null)
+{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        toastr.success('@TempData["success"]', 'Thành công');
+    });
+    </script>
+
+
+}
+<style>
+    .upload {
+       
+        position: relative;
+      
+    }
+
+        .upload img {
+            border-radius: 50%;
+            border: 6px solid #eaeaea;
+        }
+
+        .upload .round {
+            position: absolute;
+            bottom: -5px;
+            right: 637px;
+            background: #00B4FF;
+            width: 32px;
+            height: 32px;
+            line-height: 33px;
+            text-align: center;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+            .upload .round input[type = "file"] {
+                position: absolute;
+                transform: scale(2);
+                opacity: 0;
+            }
+
+    input[type=file]::-webkit-file-upload-button {
+        cursor: pointer;
+    }
+</style>
+
+<main class="main-wrapper">
+    <!-- Start Breadcrumb Area  -->
+    <div class="axil-breadcrumb-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="inner">
+                        <ul class="axil-breadcrumb">
+                            <li class="axil-breadcrumb-item"><a href="/">@StaticRescouces.ResourceUser.Trangchu</a></li>
+                            <li class="separator"></li>
+                            <li class="axil-breadcrumb-item active" aria-current="page">@StaticRescouces.ResourceUser.taikhoannguoidung</li>
+                        </ul>
+                        <h1 class="title">@StaticRescouces.ResourceUser.thongtintatcanguoidung</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4">
+                    <div class="inner">
+                        <div class="bradcrumb-thumb">
+                            <img src="~/Content/User/assets/images/product/product-45.png" alt="Image">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb Area  -->
+    <!-- Start My Account Area  -->
+    <div class="axil-dashboard-area axil-section-gap">
+        <div class="container">
+            <div class="axil-dashboard-warp">
+                <div class="axil-dashboard-author">
+                    <div class="media">
+                        <div class="thumbnail">
+                            
+                            
+                                <img  src="@Model.Image" style="width:70px;height:70px" alt="@User.Identity.Name">
+                                
+                            </div>
+                     </div>
+                            
+
+
+                        <div class="media-body">
+                            <h5 class="title mb-0">@StaticRescouces.ResourceUser.xinchao @User.Identity.Name</h5>
+                            @if ((currentLanguage == "vi"))
+                            {
+                                <span class="joining-date">@StaticRescouces.ResourceUser.thanhvien @Model.CreatetAcount.ToString("dd") tháng @Model.CreatetAcount.ToString("MM") năm @Model.CreatetAcount.ToString("yyyy")</span>
+                            }
+                            else
+                            {
+                                <span class="joining-date">@StaticRescouces.ResourceUser.thanhvien moth @Model.CreatetAcount.ToString("MM") day @Model.CreatetAcount.ToString("dd")  year @Model.CreatetAcount.ToString("yyyy")</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-3 col-md-4">
+                        <aside class="axil-dashboard-aside">
+                            <nav class="axil-dashboard-nav">
+                                <div class="nav nav-tabs" role="tablist">
+                                    <a class="nav-item nav-link active" data-bs-toggle="tab" href="#nav-dashboard" role="tab" aria-selected="true"><i class="fas fa-th-large"></i>Dashboard</a>
+                                    <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-orders" role="tab" aria-selected="false"><i class="fas fa-shopping-basket"></i>@StaticRescouces.ResourceUser.dathang</a>
+                                    <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-downloads" role="tab" aria-selected="false"><i class="fas fa-file-download"></i>@StaticRescouces.ResourceUser.xemsanphamyeuthich</a>
+                                    <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-address" role="tab" aria-selected="false"><i class="fas fa-home"></i>@StaticRescouces.ResourceUser.diachinguoidung</a>
+                                    <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-account" role="tab" aria-selected="false"><i class="fas fa-user"></i>@StaticRescouces.ResourceUser.chitiettaikhoan</a>
+                                    <a class="nav-item nav-link" href="javascript:document.getElementById('logOffForm').submit()"><i class="fal fa-sign-out"></i>@StaticRescouces.ResourceUser.String10</a>
+                                </div>
+                            </nav>
+                        </aside>
+                    </div>
+                    <div class="col-xl-9 col-md-8">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel">
+                                <div class="axil-dashboard-overview">
+                                    <div class="welcome-text">@StaticRescouces.ResourceUser.xinchao @User.Identity.Name (@StaticRescouces.ResourceUser.String12 <span>@User.Identity.Name?</span> <a href="javascript:document.getElementById('logOffForm').submit()">@StaticRescouces.ResourceUser.String10</a>)</div>
+                                    <p>@StaticRescouces.ResourceUser.String11</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-orders" role="tabpanel">
+                                <div class="axil-dashboard-order">
+                                    <div class="table-responsive">
+                                        @Html.Action("LichSuDonHang", "Review")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-downloads" role="tabpanel">
+                                <div class="axil-dashboard-order">
+                                    @{Html.RenderAction("Index", "Wishlist");}
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-address" role="tabpanel">
+                                <div class="axil-dashboard-address">
+                                    <p class="notice-text">@StaticRescouces.ResourceUser.String12</p>
+                                    <div class="row row--30">
+                                        <div class="col-lg-6">
+                                            <div class="address-info mb--40">
+                                                <div class="addrss-header d-flex align-items-center justify-content-between">
+                                                    <h4 class="title mb-0">@StaticRescouces.ResourceUser.diachigiaohang</h4>
+                                                    <a href="#" class="address-edit"><i class="far fa-edit"></i></a>
+                                                </div>
+                                                <ul class="address-details">
+                                                    <li>@StaticRescouces.ResourceUser.tenkhachhnag: @Model.FullName</li>
+                                                    <li>Email: @Model.Email</li>
+                                                    <li>@StaticRescouces.ResourceUser.sodienthoai: @Model.Phone</li>
+                                                    <li class="mt--30">
+                                                        @Model.Address <br>
+                                                        @ViewBag.ProvinceName, @ViewBag.DistrictName  @ViewBag.WardName
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="address-info">
+                                                <div class="addrss-header d-flex align-items-center justify-content-between">
+                                                    <h4 class="title mb-0">@StaticRescouces.ResourceUser.diachihanhtoan</h4>
+                                                    <a href="#" class="address-edit"><i class="far fa-edit"></i></a>
+                                                </div>
+                                                <ul class="address-details">
+                                                    <li>@StaticRescouces.ResourceUser.tenkhachhnag: @Model.FullName</li>
+                                                    <li>Email: @Model.Email</li>
+                                                    <li>@StaticRescouces.ResourceUser.sodienthoai: @Model.Phone</li>
+                                                    <li class="mt--30">
+                                                        @Model.Address @ViewBag.ProvinceName, @ViewBag.DistrictName <br>
+                                                        @ViewBag.WardName
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @using (Html.BeginForm("PostProfile", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="tab-pane fade" id="nav-account" role="tabpanel">
+
+                                    @Html.ValidationSummary(false)
+                                    @Html.AntiForgeryToken()
+                                    <div class="col-lg-9">
+                                        <div class="axil-dashboard-account">
+                                            <form class="account-details-form">
+                                                <div class="row">
+
+
+
+
+
+                                                    <div class="col-12">
+
+                                                        <div class="upload">
+                                                            <img id="selectedAvatar" src="@Model.Image" style="width:70px;height:70px" alt="@User.Identity.Name">
+                                                            <div class="round">
+                                                                <input type="file" name="ImageFile" id="customFile2" onchange="displaySelectedImage(event, 'selectedAvatar')">
+                                                                <i class="fa fa-camera" style="color: #fff;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>@StaticRescouces.ResourceUser.hovaten</label>
+                                                            <input type="text" class="form-control" name="FullName" value="@Model.FullName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>@StaticRescouces.ResourceUser.TaiKhoan</label>
+                                                            <input type="text" class="form-control" name="UserName" value="@Model.UserName" readonly>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>@StaticRescouces.ResourceUser.sodienthoai</label>
+                                                            <input type="text" class="form-control" name="Phone" value="@Model.Phone">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>Email</label>
+                                                            <input type="text" class="form-control" name="Email" value="@Model.Email" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group mb--40">
+                                                            <label>Tỉnh/ thành</label>
+                                                            @Html.DropDownList("ProviceID", (IEnumerable<SelectListItem>)ViewBag.ProvinceList, new { @class = "select2", @id = "ddlProvince" })
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group mb--40">
+                                                            <label>Quận huyện</label>
+                                                            @Html.DropDownList("DistrictID", (IEnumerable<SelectListItem>)ViewBag.DistrictList, new { @class = "select2", @id = "ddlDistrict" })
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group mb--40">
+                                                            <label>Tỉnh/ thành</label>
+                                                            @Html.DropDownList("WardID", (IEnumerable<SelectListItem>)ViewBag.WardList, new { @class = "select2", @id = "ddlWard" })
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <h5 class="title">Password Change</h5>
+                                                        <div class="form-group">
+                                                            <label>@StaticRescouces.ResourceUser.matkhau</label>
+                                                            <input type="password" class="form-control" name="Password">
+                                                            @Html.ValidationMessageFor(model => model.Password)
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>@StaticRescouces.ResourceUser.matkhaumoi</label>
+                                                            <input type="password" class="form-control" name="NewPassword">
+                                                            @Html.ValidationMessageFor(model => model.NewPassword)
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>@StaticRescouces.ResourceUser.nhaplaimatkhaumoi</label>
+                                                            <input type="password" class="form-control" name="ConfirmPassword">
+                                                        </div>
+                                                        <div class="form-group mb--0">
+                                                            <input type="submit" class="axil-btn" value=@StaticRescouces.ResourceUser.save>
+                                                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End My Account Area  -->
+    <!-- Start Axil Newsletter Area  -->
+    @Html.Action("Partial_subcrice", "Home")
+    <!-- End Axil Newsletter Area  -->
+</main>
+<script>
+    function displaySelectedImage(event, elementId) {
+        const selectedImage = document.getElementById(elementId);
+        const fileInput = event.target;
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                selectedImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+
+
+
+
+    var user = {
+        init: function () {
+
+            user.loadProvince();
+            user.registerEvent();
+        },
+        registerEvent: function () {
+            $('#ddlProvince').off('change').on('change', function () {
+                var id = $(this).val();
+                if (id != '') {
+                    user.loadDistrict(parseInt(id));
+                }
+                else {
+                    $('#ddlDistrict').html('');
+                }
+            });
+            $('#ddlDistrict').off('change').on('change', function () {
+                var id = $(this).val();
+                if (id != '') {
+                    user.LoadPrecinct(parseInt(id));
+                } else {
+                    $('#ddlWard').html('');
+                }
+            });
+        },
+        loadProvince: function () {
+
+            $.ajax({
+                url: '/LoadProvice/LoadProvince',
+                type: "POST",
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+
+                        var data = response.data;
+                        $.each(data, function (i, item) {
+                            html += '<option value="' + item.ID + '">' + item.Name + '</option>'
+                        });
+                        $('#ddlProvince').html(html);
+                    }
+                }
+            })
+        },
+        loadDistrict: function (id) {
+            $.ajax({
+                url: '/LoadProvice/LoadDistricts',
+                type: "POST",
+                data: { provinceID: id },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        var html = '<option value="">--Chọn quận huyện--</option>';
+                        var data = response.data;
+                        $.each(data, function (i, item) {
+                            html += '<option value="' + item.ID + '">' + item.Name + '</option>'
+                        });
+                        $('#ddlDistrict').html(html);
+                    }
+                }
+            })
+        },
+        LoadPrecinct: function (id) {
+            $.ajax({
+                url: '/LoadProvice/LoadPrecinct',
+                type: "POST",
+                data: { districtID: id },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        var html = '<option value="">--Chọn phường xã--</option>';
+                        var data = response.data;
+                        $.each(data, function (i, item) {
+                            html += '<option value="' + item.ID + '">' + item.Name + '</option>'
+                        });
+                        $('#ddlWard').html(html);
+                    }
+                }
+            })
+        }
+    }
+    user.init();
+</script>
+

@@ -1,0 +1,470 @@
+﻿@model PagedList.IPagedList<Models.EF.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh Sách sản phẩm";
+}
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+@*<link rel="stylesheet" type="text/css" href="~/Content/User/Cateogry/styles/bootstrap4/bootstrap.min.css">*@
+<link href="~/Content/User/Cateogry/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="~/Content/User/Cateogry/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/Content/User/Cateogry/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/Content/User/Cateogry/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="~/Content/User/Cateogry/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/Content/User/Cateogry/styles/categories_styles1.css">
+<link rel="stylesheet" type="text/css" href="~/Content/User/Cateogry/styles/categories_responsive.css">
+
+
+<br />
+<br />
+<br />
+<br />
+<main class="main-wrapper">
+    <!-- Start Breadcrumb Area  -->
+    <div class="axil-breadcrumb-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="inner">
+                        <ul class="axil-breadcrumb">
+                            <li class="axil-breadcrumb-item"><a href="/">@StaticRescouces.ResourceUser.Trangchu</a></li>
+                            <li class="separator"></li>
+                            <li class="axil-breadcrumb-item active" aria-current="page">@ViewBag.CateName</li>
+                        </ul>
+                        <h1 class="title">@StaticRescouces.ResourceUser.Khamphatatcasanpham</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4">
+                    <div class="inner">
+                        <div class="bradcrumb-thumb">
+
+                            <img src="~/Content/User/assets/images/product/product-45.png" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb Area  -->
+    <!-- Start Shop Area  -->
+    <div class="axil-shop-area axil-section-gap bg-color-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="axil-shop-sidebar">
+                        <div class="d-lg-none">
+                            <button class="sidebar-close filter-close-btn"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="toggle-list product-categories active">
+                            <h6 class="title">@StaticRescouces.ResourceUser.DanhMuc</h6>
+                            <div class="shop-submenu">
+                                @Html.Action("MenuLeft", "Menu")
+                            </div>
+                        </div>
+                        @*<div class="toggle-list product-categories product-gender active">
+                                <h6 class="title">GENDER</h6>
+                                <div class="shop-submenu">
+                                    <ul>
+                                        <li class="chosen"><a href="#">Men (40)</a></li>
+                                        <li><a href="#">Women (56)</a></li>
+                                        <li><a href="#">Unisex (18)</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="toggle-list product-color active">
+                                <h6 class="title">COLORS</h6>
+                                <div class="shop-submenu">
+                                    <ul>
+                                        <li class="chosen"><a href="#" class="color-extra-01"></a></li>
+                                        <li><a href="#" class="color-extra-02"></a></li>
+                                        <li><a href="#" class="color-extra-03"></a></li>
+                                        <li><a href="#" class="color-extra-04"></a></li>
+                                        <li><a href="#" class="color-extra-05"></a></li>
+                                        <li><a href="#" class="color-extra-06"></a></li>
+                                        <li><a href="#" class="color-extra-07"></a></li>
+                                        <li><a href="#" class="color-extra-08"></a></li>
+                                        <li><a href="#" class="color-extra-09"></a></li>
+                                        <li><a href="#" class="color-extra-10"></a></li>
+                                        <li><a href="#" class="color-extra-11"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="toggle-list product-size active">
+                                <h6 class="title">SIZE</h6>
+                                <div class="shop-submenu">
+                                    <ul>
+                                        <li class="chosen"><a href="#">XS</a></li>
+                                        <li><a href="#">S</a></li>
+                                        <li><a href="#">M</a></li>
+                                        <li><a href="#">L</a></li>
+                                        <li><a href="#">XL</a></li>
+                                        <li><a href="#">XXL</a></li>
+                                        <li><a href="#">3XL</a></li>
+                                        <li><a href="#">4XL</a></li>
+                                    </ul>
+                                </div>
+                            </div>*@
+                        <div class="toggle-list product-price-range active">
+                            <h6 class="title">@StaticRescouces.ResourceUser.Gia</h6>
+                            <div class="shop-submenu">
+                                @*<ul>
+                                        <li class="chosen"><a href="#">30</a></li>
+                                        <li><a href="#">5000</a></li>
+                                    </ul>*@
+                                <form action="#" class="mt--25">
+                                    <div id="slider-range"></div>
+                                    <div class="flex-center mt--20">
+                                        <span class="input-range">@StaticRescouces.ResourceUser.Gia: </span>
+
+                                        <input type="text" id="amount" class="amount-range" readonly>
+                                        <input type="hidden" id="FromAmount" />
+                                        <input type="hidden" id="ToAmount" />
+
+                                    </div>
+                                    <div class="filter_button"><span class="xil-btn btn-bg-primary">@StaticRescouces.ResourceUser.Loc</span></div>
+                                </form>
+                            </div>
+                        </div>
+                        <button onclick="window.location.href = '/san-pham';" class="axil-btn btn-bg-primary">@StaticRescouces.ResourceUser.Khoiphucmacdinh</button>
+                        @Html.Action("Refresh", "Home")
+                    </div>
+                    <!-- End .axil-shop-sidebar -->
+                </div>
+                <div class="col-lg-9">
+                    <!-- Products -->
+
+                    <div class="products_iso">
+                        <div class="row">
+                            <div class="col">
+
+                                <!-- Product Sorting -->
+
+                                <div class="product_sorting_container product_sorting_container_top">
+                                    <ul class="product_sorting">
+                                        <li>
+                                            <span class="type_sorting_text">@StaticRescouces.ResourceUser.Macdinhphanloai</span>
+                                            <i class="fa fa-angle-down"></i>
+                                            <ul class="sorting_type">
+                                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>@StaticRescouces.ResourceUser.Macdinh</span></li>
+                                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>@StaticRescouces.ResourceUser.Gia</span></li>
+                                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>@StaticRescouces.ResourceUser.tensanpham</span></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span>@StaticRescouces.ResourceUser.Hien </span>
+                                            <span class="num_sorting_text">6</span>
+                                            <i class="fa fa-angle-down"></i>
+                                            <ul class="sorting_num">
+                                                <li class="num_sorting_btn"><span>6</span></li>
+                                                <li class="num_sorting_btn"><span>12</span></li>
+                                                <li class="num_sorting_btn"><span>24</span></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <div class="pages d-flex flex-row align-items-center">
+                                        @if (Model.HasPreviousPage)
+                                        {
+                                            <div class="page_current">
+                                                <div id="next_page" class="page_next">
+                                                    <a href="@Url.Action("Index", new { page = Model.PageNumber - 1, pageSize = ViewBag.PageSize })">
+                                                        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <div class="page_current">
+                                            <span>@Model.PageNumber</span>
+                                            <ul class="page_selection">
+                                                @for (int i = 1; i <= Model.PageCount; i++)
+                                                {
+                                                    <li class="@(i == Model.PageNumber ? "active" : "")">
+                                                        <a href="@Url.Action("Index", new { page = i, pageSize = ViewBag.PageSize })">@i</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+
+                                        <div class="page_total"><span>of</span> @Model.PageCount</div>
+
+                                        @if (Model.HasNextPage)
+                                        {
+                                            <div id="next_page" class="page_next">
+                                                <a href="@Url.Action("Index", new { page = Model.PageNumber + 1, pageSize = ViewBag.PageSize })">
+                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+
+
+
+
+
+                                </div>
+
+                                <!-- Product Grid -->
+
+                                <div class="product-grid">
+
+                                    <!-- Product 1 -->
+                                    @if (Model != null && Model.Any())
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            var strImage = "";
+                                            var img = item.ProductImage.FirstOrDefault(x => x.IsDefaul);
+                                            var imgGoc = item.Image;
+                                            var imgfalse = item.ProductImage.FirstOrDefault(x => x.IsDefaul == false);
+
+
+
+                                            if (img != null)
+                                            {
+
+                                                strImage = img.image;
+                                            }
+                                            else if (imgGoc != null || imgfalse != null)
+                                            {
+                                                strImage = imgGoc;
+                                            }
+
+                                            var wishlist = item.Wishlists.FirstOrDefault(x => x.UserName == User.Identity.Name);
+                                            var isWishlist = false;
+                                            if (wishlist != null)
+                                            {
+                                                isWishlist = true;
+                                            }
+
+                                            <div class="product-item @item.ProductCategory.Alias">
+                                                <div class="product discount product_filter">
+                                                    <div class="product_image">
+                                                        <a href="/chi-tiet/@item.Alias-p@(item.Id)">
+
+                                                            <img src="@strImage" alt="@item.Title">
+                                                        </a>
+                                                    </div>
+                                                    @if (isWishlist == true)
+                                                    {
+                                                        <div data-id="@item.Id" class="favorite favorite_left active"></div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div data-id="@item.Id" class="favorite favorite_left"></div>
+                                                    }
+                                                    @if (item.Price != 0)
+                                                    {
+                                                        if (item.PriceSale > 0)
+                                                        {
+                                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+                                                                <span>@(Math.Round((double)((item.Price - item.PriceSale) / item.Price * 100), 0))% @StaticRescouces.ResourceUser.Giam</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+                                                                <span>N/A</span> <!-- Handle the case where item.PriceSale is not greater than 0 -->
+                                                            </div>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+                                                            <span>N/A</span> <!-- Handle the case where item.Price is zero -->
+                                                        </div>
+                                                    }
+
+
+
+                                                    <div class="product_info">
+
+                                                        <h6 class="product_name"><a href="/chi-tiet/@item.Alias-p@(item.Id)">@item.Title</a></h6>
+                                                        @if ((currentLanguage == "vi"))
+                                                        {
+                                                            if (item.PriceSale > 0)
+                                                            {
+                                                                <div class="product_price">@Models.Common.Common.FormatNumber(item.PriceSale, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)<span>@Models.Common.Common.FormatNumber(item.Price, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span></div>
+
+                                                                <div style="display:none;" class="in_product_price"> @item.PriceSale</div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="product_price">@Models.Common.Common.FormatNumber(item.Price, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</div>
+                                                                <div style="display:none;" class="in_product_price"> @item.Price</div>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.PriceSale > 0)
+                                                            {
+                                                                <div class="product_price">@Models.Common.Common.FormatNumber(item.PriceSale / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)<span>@Models.Common.Common.FormatNumber(item.Price / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span></div>
+
+                                                                <div style="display:none;" class="product_price"> @(item.PriceSale / 24310)</div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="product_price">@Models.Common.Common.FormatNumber(item.Price / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</div>
+                                                                <div style="display:none;" class="product_price"> @(item.Price/ 24310)</div>
+                                                            }
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="red_button add_to_cart_button"><a href="#" class="btnAddToIndex" data-id="@item.Id">@StaticRescouces.ResourceUser.ThemGioHang</a></div>
+                                            </div>
+                                        }
+                                    }
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <!-- Product Sorting -->
+
+                                <div class="product_sorting_container product_sorting_container_bottom clearfix">
+                                    <ul class="product_sorting">
+                                        <li>
+                                            <span>Xem:</span>
+                                            <span class="num_sorting_text">04</span>
+                                            <i class="fa fa-angle-down"></i>
+                                            <ul class="sorting_num">
+                                                <li class="num_sorting_btn"><span>01</span></li>
+                                                <li class="num_sorting_btn"><span>02</span></li>
+                                                <li class="num_sorting_btn"><span>03</span></li>
+                                                <li class="num_sorting_btn"><span>04</span></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                    <span class="showing_results">@StaticRescouces.ResourceUser.Xem @Model.FirstItemOnPage – @Model.LastItemOnPage of @Model.TotalItemCount @StaticRescouces.ResourceUser.Ketqua</span>
+                                    <div class="pages d-flex flex-row align-items-center">
+                                        <div class="page_total">
+                                            @if (Model.HasPreviousPage)
+                                            {
+                                                <div id="next_page" class="page_next">
+                                                    <a href="@Url.Action("Index", new { page = Model.PageNumber - 1, pageSize = ViewBag.PageSize })">
+                                                        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            }
+
+
+                                        </div>
+
+                                        <div class="page_current">
+                                            <span>@Model.PageNumber</span>
+                                            <ul class="page_selection">
+                                                @for (int i = 1; i <= Model.PageCount; i++)
+                                                {
+                                                    <li class="@(i == Model.PageNumber ? "active" : "")"><a href="@Url.Action("Index", new { page = i, pageSize = ViewBag.PageSize })">@i</a></li>
+                                                }
+                                            </ul>
+                                        </div>
+
+                                        <div class="page_total"><span>of</span> @Model.PageCount</div>
+
+                                        @if (Model.HasNextPage)
+                                        {
+                                            <div id="next_page" class="page_next">
+                                                <a href="@Url.Action("Index", new { page = Model.PageNumber + 1, pageSize = ViewBag.PageSize })">
+                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End .row -->
+                    <div class="row row--15">
+
+                    </div>
+                    @*<div class="text-center pt--20">
+                            <a href="#" class="axil-btn btn-bg-lighter btn-load-more">Load more</a>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <!-- End .container -->
+    </div>
+    <!-- End Shop Area  -->
+    <!-- Start Axil Newsletter Area  -->
+    @Html.Action("Partial_subcrice", "Home")
+    <!-- End Axil Newsletter Area  -->
+</main>
+
+
+
+
+<script src="~/Content/User/Cateogry/js/jquery-3.2.1.min.js"></script>
+<script src="~/Content/User/Cateogry/styles/bootstrap4/popper.js"></script>
+<script src="~/Content/User/Cateogry/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="~/Content/User/Cateogry/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="~/Content/User/Cateogry/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="~/Content/User/Cateogry/plugins/easing/easing.js"></script>
+<script src="~/Content/User/Cateogry/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+@if ((currentLanguage == "vi"))
+{
+    <script src="~/Content/User/Cateogry/js/categories_custom.js"></script>
+}
+else
+{
+    <script src="~/Content/User/Cateogry/js/categories_customEN.js"></script>
+}
+<script src="~/Content/User/Cateogry/js/custom.js"></script>
+<!-- Thêm thư viện SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.btnAddToIndex', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var quantity = 1;
+            var tQuantity = $('#quantity_value').text();
+            if (tQuantity != '') {
+                quantity = parseInt(tQuantity);
+            }
+
+            $.ajax({
+                url: '/ShoppingCart/AddToCart',
+                type: 'POST',
+                data: { id: id, quantity: quantity },
+                success: function (rs) {
+                    if (rs.Success) {
+                        $('#checkout_items').html(rs.Count);
+
+                        // Sử dụng SweetAlert2 thay vì alert
+                        Swal.fire({
+                            icon: 'success',
+                            title: rs.msg,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+
+
+
+

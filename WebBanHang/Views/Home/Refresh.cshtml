@@ -1,0 +1,32 @@
+﻿@model Models.ThongKeModel
+@if(Model != null)
+            {
+                <div class="thongke">
+                    <table class="table">
+                        <tr>
+                            <td>@StaticRescouces.ResourceUser.Homnay</td>
+                            <td>@Model.HomNay</td>
+                        </tr>
+                        <tr>
+                            <td>@StaticRescouces.ResourceUser.Homqua</td>
+                            <td>@Model.HomQua</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @StaticRescouces.ResourceUser.Tuannay
+                            </td>
+                            <td>
+                                @Model.TuanNay
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @StaticRescouces.ResourceUser.Songuoionline
+                            </td>
+                            <td>
+                                @ViewBag.Visitors_online
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }

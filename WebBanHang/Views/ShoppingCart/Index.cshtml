@@ -1,0 +1,321 @@
+﻿@model IEnumerable<Models.ShopCart.ShoppingCartItem>
+@using Models.Common
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var tongtien = decimal.Zero;
+    var tatcatien = decimal.Zero;
+
+}
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+<!-- Start Cart Area  -->
+<div class="axil-product-cart-area axil-section-gap">
+    <div class="container">
+        <div class="axil-product-cart-wrap">
+            <div class="product-table-heading">
+                <h4 class="title">@StaticRescouces.ResourceUser.Giohang</h4>
+                <a href="#" class="cart-clear btnDeleteAll">@StaticRescouces.ResourceUser.Xoatatcasanphamtronggiohang</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table axil-product-table axil-cart-table mb--40">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="product-remove"></th>
+                            <th scope="col" class="product-thumbnail">@StaticRescouces.ResourceUser.Stt</th>
+                            <th scope="col" class="product-thumbnail">@StaticRescouces.ResourceUser.sanpham</th>
+                            <th scope="col" class="product-title"></th>
+                            <th scope="col" class="product-price">@StaticRescouces.ResourceUser.Gia</th>
+                            <th scope="col" class="product-quantity">@StaticRescouces.ResourceUser.soluong</th>
+                            <th scope="col" class="product-subtotal">@StaticRescouces.ResourceUser.tong</th>
+                            <th scope="col" class="product-remove"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            var i = 0;
+
+                            foreach (var item in Model)
+                            {
+
+                                tongtien += item.TotalPrice;//phí tạm
+                                item.AllPrice = tongtien;
+                                tatcatien = item.AllPrice;
+                                <tr id="trow_@item.ProductId">
+                                    <td class="product-remove"><a href="#" data-id="@item.ProductId" class="remove-wishlist btnDeleteOne"><i class="fal fa-times"></i></a></td>
+                                    <td>@(i+1)</td>
+                                    <td class="product-thumbnail"><a href="/chi-tiet/@item.Alias-p@(item.ProductId)"><img src="@item.ProductImg" alt="@item.ProductName"></a></td>
+                                    <td class="product-title"><a href="/chi-tiet/@item.Alias-p@(item.ProductId)">@item.ProductName</a></td>
+                                    <!--<td>@item.CategoryName</td>--> <!-- Removed the extra </a> tag -->
+
+
+                                    @if (currentLanguage == "vi")
+                                    {
+                                        <td class="product-price" data-title="Price">@Common.FormatNumber(item.Price, 0)<span class="currency-symbol">@Html.Raw(StaticRescouces.ResourceUser.Tien)</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="product-price" data-title="Price">@Common.FormatNumber(item.Price / 24310, 0)<span class="currency-symbol">@Html.Raw(StaticRescouces.ResourceUser.Tien)</span></td>
+                                    }
+                                    <td class="product-quantity" data-title="Qty">
+                                        <div class="pro-qty">
+                                            <input type="number" class="txtQuantity quantity-input" id="Quantity_@item.ProductId" value="@item.Quantity" data-product-id="@item.ProductId">
+
+                                        </div>
+
+                                    </td>
+
+                                    @if (currentLanguage == "vi")
+                                    {
+                                        <td class="product-subtotal" data-title="Subtotal">@Common.FormatNumber(item.TotalPrice)<span class="currency-symbol">@Html.Raw(StaticRescouces.ResourceUser.Tien)</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="product-price" data-title="Price">@Common.FormatNumber(item.TotalPrice / 24310, 0)<span class="currency-symbol">@Html.Raw(StaticRescouces.ResourceUser.Tien)</span></td>
+                                    }
+                                    <td class="product-remove"><a href="#" data-id="@item.ProductId" class="remove-wishlist btnUpdate"><i class="fas fa-sync"></i></a></td>
+                                </tr>
+
+                                i++;
+                            }
+
+
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>@StaticRescouces.ResourceUser.khongcosanphamtrongigohang</td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="cart-update-btn-area">
+
+                @using (Ajax.BeginForm("NhapGiftCode", "ShoppingCart", new AjaxOptions
+                {
+                    OnBegin = "OnBeginSub",
+                    OnSuccess = "OnSuccessSub",
+                    OnFailure = "OnFailureSub",
+                }))
+                {
+                    @Html.AntiForgeryToken()
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                    <script>
+                        function OnBeginSub() {
+
+                        }
+                        function OnSuccessSub(rs) {
+                            if (rs.Success) {
+                                $("#giamgiam1").one("click", function () {
+                                    $("#giamgiam2").toggle();
+                                });
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Nhập mã thành công', // You can customize this message
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    onClose: function () {
+                                        // Callback function when the alert is closed
+                                        LoadCart();
+
+                                        
+                                        location.reload();
+                                    }
+                                });
+
+                              
+                            }
+                            else if (rs.dd == false) {
+
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Code hết hiệu lực', // You can customize this message
+                                    showConfirmButton: false,
+                                    timer: 1500,
+
+                                });
+
+                            }
+                            else if (rs.ss) {
+
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Code đã quá 7 ngày', // You can customize this message
+                                    showConfirmButton: false,
+                                    timer: 1500,
+
+                                });
+
+                            }
+                            else if (rs.rong) {
+
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Mã code không hợp lệ', // You can customize this message
+                                    showConfirmButton: false,
+                                    timer: 1500,
+
+                                });
+
+                            }
+                            else if (rs.xx == false) {
+
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Chỉ được  nhập 1 code duy nhất trong giỏ hàng', // You can customize this message
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    onClose: function () {
+                                        // Callback function when the alert is closed
+                                        location.reload();
+
+                                    }
+                                });
+
+                            }
+                            else {
+
+
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Mã code rỗng', // You can customize this message
+                                    showConfirmButton: false,
+                                    timer: 1500,
+
+                                });
+
+
+                            }
+                        }
+                        function LoadCart() {
+                            $.ajax({
+                                url: '/ShoppingCart/Index',
+                                type: 'GET',
+
+                                success: function (rs) {
+                                    $('#load_data').html(rs); //load_data ở trang _layout.cshtml
+
+                                }
+                            });
+                        }
+                    </script>
+                    <div class="input-group product-cupon">
+                        <input name="MaCode" placeholder="@StaticRescouces.ResourceUser.Nhapcode" type="text">
+                        <div class="product-cupon-btn-2">
+                            <button id="giamgiam1" type="submit" class="axil-btn btn-outline">@StaticRescouces.ResourceUser.apdung</button>
+                        </div>
+                    </div>
+                }
+
+
+
+                <div class="update-btn">
+                    <a href="#" id="btnUpdateAll" class="axil-btn btn-outline">@StaticRescouces.ResourceUser.Capnhattatcasanpham</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5">
+                    @if (ViewBag.CheckCart != null)
+                    {
+                        decimal dd = ViewBag.TongAll;
+
+                        <div class="axil-order-summery mt--80">
+                            <h5 class="title mb--20">@StaticRescouces.ResourceUser.tongquandonhang</h5>
+                            <div class="summery-table-wrap">
+                                <table class="table summery-table mb--30">
+                                    <tbody>
+                                        <tr class="order-subtotal">
+                                            <td>@StaticRescouces.ResourceUser.tamphi</td>
+                                            @if (currentLanguage == "vi")
+                                            {
+                                                <td>@Common.FormatNumber(tongtien, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@Common.FormatNumber(tongtien / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</td>
+                                            }
+                                        </tr>
+                                        <tr class="order-shipping">
+                                            <td>@StaticRescouces.ResourceUser.phivanchuyen</td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <input type="radio" id="radio1" name="shipping" checked>
+                                                    <label for="radio1">@StaticRescouces.ResourceUser.mienphi</label>
+                                                </div>
+                                                @*<div class="input-group">
+                    <input type="radio" id="radio2" name="shipping">
+                    <label for="radio2">Local: $35.00</label>
+                </div>*@
+                                                @*<div class="input-group">
+                    <input type="radio" id="radio3" name="shipping">
+                    <label for="radio3">Flat rate: $12.00</label>
+                </div>*@
+                                            </td>
+                                        </tr>
+                                        @if (ViewBag.CountDem == 1)
+
+                                        {
+                                            <tr  id="giamgiam2" class="order-tax">
+                                                <td>Mã giảm giá</td>
+                                                <td>30%</td>
+                                            </tr>
+                                        }
+                                        <tr class="order-total">
+                                            <td>@StaticRescouces.ResourceUser.tong</td>
+                                            @if (currentLanguage == "vi")
+                                            {
+                                                <td class="order-total-amount">@Common.FormatNumber(dd, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien) </td>
+                                            }
+                                            else
+                                            {
+                                                <td class="order-total-amount">@Common.FormatNumber(dd / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien) </td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="/thanh-toan" class="axil-btn btn-bg-primary checkout-btn">@StaticRescouces.ResourceUser.Quytrinhthanhtoan</a>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Cart Area  -->
+<script>
+   
+   
+    $('body').off('click', '.btnDeleteOne').on('click', '.btnDeleteOne', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+
+        // Remove the confirmation dialog
+        // var conf = confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?');
+
+        // Always proceed with the deletion without confirmation
+        // if (conf == true) {
+        $.ajax({
+            url: '/ShoppingCart/Delete',
+            type: 'POST',
+            data: { id: id },
+            success: function (rs) {
+                if (rs.Success) {
+                    $('#checkout_items').html(rs.Count);
+                    $('#trow_' + id).remove();
+
+                    LoadCart();
+                }
+            }
+        });
+        // }
+    });
+
+</script>

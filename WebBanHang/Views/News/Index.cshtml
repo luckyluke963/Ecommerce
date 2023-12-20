@@ -1,0 +1,309 @@
+﻿@model PagedList.IPagedList<Models.EF.News>
+@using PagedList.Mvc;
+@using Models.Model
+
+@{
+    ViewBag.Title = "Tin tức";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@{
+    var lastNew = (List<Models.EF.News>)ViewBag.LastNew;
+}
+
+<main class="main-wrapper">
+    <!-- Start Breadcrumb Area  -->
+    <div class="axil-breadcrumb-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="inner">
+                        <ul class="axil-breadcrumb">
+                            <li class="axil-breadcrumb-item"><a href="index.html">@StaticRescouces.ResourceUser.Trangchu</a></li>
+                            <li class="separator"></li>
+                            <li class="axil-breadcrumb-item active" aria-current="page">@StaticRescouces.ResourceUser.tintuc</li>
+                        </ul>
+                        <h1 class="title">@StaticRescouces.ResourceUser.newlist</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4">
+                    <div class="inner">
+                        <div class="bradcrumb-thumb">
+
+                            <img src="~/Content/User/assets/images/product/product-45.png" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb Area  -->
+    <!-- Start Blog Area  -->
+    <div class="axil-blog-area axil-section-gap">
+        <div class="container">
+            <div class="row row--25">
+                <div class="col-lg-8 axil-post-wrapper">
+
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <!-- Start Single Blog  -->
+                            <div class="content-blog mt--60">
+                                <div class="inner">
+                                    <div class="blog-gallery-activation axil-slick-arrow arrow-between-side">
+                                        <!-- Start Single Thumb  -->
+                                        <div class="thumbnail">
+                                            <a href="/@item.Alias-n@(item.Id)">
+                                                <img src="@item.Image" alt="@item.Title">
+                                            </a>
+                                        </div>
+                                        <!-- End Single Thumb  -->
+                                        <!-- Start Single Thumb  -->
+                                        @*<div class="thumbnail">
+                                                <a href="blog-gallery.html">
+                                                    <img src="~/Content/User/assets/images/blog/blog-02.png" alt="Blog Images">
+                                                </a>
+                                            </div>*@
+                                        <!-- End Single Thumb  -->
+                                    </div>
+                                    <div class="content">
+                                        <h4 class="title">
+                                            <a href="/@item.Alias-n@(item.Id)">
+                                                @item.Title
+                                            </a>
+                                        </h4>
+                                        <div class="axil-post-meta">
+                                            @*<div class="post-author-avatar">
+                                                    <img src="~/Content/User/assets/images/blog/author-image-3.png" alt="Author Images">
+                                                </div>*@
+                                            <div class="post-meta-content">
+                                                @*<h6 class="author-title">
+                                                        <a href="#"></a>
+                                                    </h6>*@
+                                                <ul class="post-meta-list">
+                                                    <li>@item.CreateDate</li>
+                                                    @*<li>300k Views</li>*@
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p>@item.SeoTitle</p>
+                                        <div class="read-more-btn">
+                                            <a class="axil-btn btn-bg-primary" href="/@item.Alias-n@(item.Id)">@StaticRescouces.ResourceUser.docnhieu</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Blog  -->
+                        }
+                    }
+                </div>
+                <div class="col-lg-4">
+                    <!-- Start Sidebar Area  -->
+                    <aside class="axil-sidebar-area">
+
+                        <!-- Start Single Widget  -->
+                        <div class="axil-single-widget mt--40">
+                            <h6 class="widget-title">@StaticRescouces.ResourceUser.baivietmoinhat</h6>
+                            @foreach (var item in lastNew)
+                            {
+                                <!-- Start Single Post List  -->
+                                <div class="content-blog post-list-view mb--20">
+
+                                    <div class="thumbnail">
+                                        <a href="@item.Alias">
+                                            <img src="@item.Image" alt="@item.Title">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h6 class="title"><a href="blog-details.html">@item.Title</a></h6>
+                                        <div class="axil-post-meta">
+                                            <div class="post-meta-content">
+                                                <ul class="post-meta-list">
+                                                    <li>@item.CreateDate.ToString("ddMMyyyy")</li>
+                                                    <li>300k Views</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            }
+
+
+
+                        </div>
+                        <!-- End Single Widget  -->
+                        <!-- Start Single Widget  -->
+
+                        @{
+                            var recentProductList = ViewData["RecentProductList"] as List<RecentProduct>;
+                            string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+                        }
+                        @if (recentProductList != null)
+                        {
+                            <div class="axil-single-widget mt--40">
+                                <h6 class="widget-title">@StaticRescouces.ResourceUser.sanphamxemganday</h6>
+
+                                <ul class="product_list_widget recent-viewed-product">
+
+                                    <!-- Start Single product_list  -->
+                                    @foreach (var recentProduct in recentProductList)
+                                    {
+                                        <li>
+                                            <div class="thumbnail">
+                                                <a href="/chi-tiet/@recentProduct.alas-p@(recentProduct.ProductId)">
+                                                    <img src="@recentProduct.image" alt="@recentProduct.ProdutName">
+                                                </a>
+                                            </div>
+                                            <div class="content">
+                                                <h6 class="title"><a href="/chi-tiet/@recentProduct.alas-p@(recentProduct.ProductId)">@recentProduct.ProdutName</a></h6>
+                                                <div class="product-meta-content">
+                                                    @if ((currentLanguage == "vi"))
+                                                    {
+                                                        if (recentProduct.priceSale > 0)
+                                                        {
+                                                            <span class="woocommerce-Price-amount amount">
+
+                                                                <del>@Models.Common.Common.FormatNumber(recentProduct.price, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</del>
+                                                                @Models.Common.Common.FormatNumber(recentProduct.priceSale, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="woocommerce-Price-amount amount">
+
+                                                                <del>@Models.Common.Common.FormatNumber(recentProduct.price, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</del>
+                                                                @Models.Common.Common.FormatNumber(recentProduct.price, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)
+                                                            </span>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (recentProduct.priceSale > 0)
+                                                        {
+                                                            <span class="woocommerce-Price-amount amount">
+
+                                                                <del>@Models.Common.Common.FormatNumber(recentProduct.price / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</del>
+                                                                @Models.Common.Common.FormatNumber(recentProduct.priceSale, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="woocommerce-Price-amount amount">
+
+                                                                @Models.Common.Common.FormatNumber(recentProduct.price / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)
+
+                                                            </span>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                    <!-- End Single product_list  -->
+                                    <!-- Start Single product_list  -->
+                                    <!-- End Single product_list  -->
+                                </ul>
+
+                            </div>
+                        }
+                        <!-- End Single Widget  -->
+                        <!-- Start Single Widget  -->
+                        <div class="axil-single-widget mt--40 widget_search">
+                            <h6 class="widget-title">Search</h6>
+                            <form class="blog-search" action="#">
+                                @using (Html.BeginForm("Index", "News", FormMethod.Get))
+                                {
+                                    <button type="submit" class="search-button"><i class="fal fa-search"></i></button>
+                                    <input type="text" name="name" placeholder="Search">
+                                }
+
+                            </form>
+                        </div>
+                        <!-- End Single Widget  -->
+                        <!-- Start Single Widget  -->
+                        <!--<div class="axil-single-widget mt--40 widget_archive">
+                            <h6 class="widget-title">Archives List</h6>
+                            <ul>
+                               
+                                <li><a href="#">January 2020</a></li>
+                                <li><a href="#">February 2020</a></li>
+                                <li><a href="#">March 2020</a></li>
+                                <li><a href="#">April 2020</a></li>
+                            </ul>
+                        </div>-->
+                        <!-- End Single Widget  -->
+                        <!-- Start Single Widget  -->
+
+                        <!--<div class="axil-single-widget mt--40 widget_archive_dropdown">
+                            <h6 class="widget-title">Archives Dropdown</h6>
+                            <select>
+                                <option>Select Month</option>
+                                <option>April 2020 (4)</option>
+                                <option>May 2020 (4)</option>
+                                <option>June 2020 (4)</option>
+                                <option>July 2020 (4)</option>
+                            </select>
+                        </div>-->
+                        <!-- End Single Widget  -->
+                        <!-- Start Single Widget  -->
+                        @{ 
+                            
+                            var ListProductcateogry  = ViewBag.listProduct as IEnumerable<Models.EF.ProductCategory>;
+                        }
+                        <div class="axil-single-widget mt--40 widget_tag_cloud">
+                            <h6 class="widget-title">@StaticRescouces.ResourceUser.tags</h6>
+                           
+
+                            <div class="tagcloud">
+                                @if (ListProductcateogry != null && ListProductcateogry.Any())
+                                {
+                                    foreach (var item in ListProductcateogry)
+                                    {
+                                        if ((currentLanguage == "vi"))
+                                        {
+                                            <a href="/danh-muc-san-pham/@item.Alias">@item.Title.</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/danh-muc-san-pham/@item.Alias">@item.Title.</a>
+                                        }
+                                    }
+
+                                }
+
+
+                            </div>
+                        </div>
+                        <!-- End Single Widget  -->
+
+                    </aside>
+                    <!-- End Sidebar Area -->
+                </div>
+            </div>
+            <div class="post-pagination">
+                <nav class="navigation pagination" aria-label="Products">
+                    <ul class="page-numbers">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+
+                    </ul>
+                    <div class="row">
+
+                        <div class="col-6" style="text-align:right;">
+
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!-- End post-pagination -->
+        </div>
+        <!-- End .container -->
+    </div>
+    <!-- End Blog Area  -->
+    <!-- Start Axil Newsletter Area  -->
+    @Html.Action("Partial_subcrice", "Home")
+    <!-- End Axil Newsletter Area  -->
+</main>

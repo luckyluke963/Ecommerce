@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Models.ShopCart.ShoppingCartItem>
+@using Models.Common
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+@if (Model != null && Model.Any())
+{
+    var i = 0;
+    var tongtien = decimal.Zero;
+    <table class="table summery-table">
+        <thead>
+            <tr>
+                <th>@StaticRescouces.ResourceUser.sanpham</th>
+                <th>@StaticRescouces.ResourceUser.tongphu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                tongtien += item.TotalPrice;
+
+                <tr class="order-product">
+
+                    <td><img src="@item.ProductImg" style="width: 50px; height:50px" /> @item.ProductName <span class="quantity">x @item.Quantity</span></td>
+                    @if ((currentLanguage == "vi"))
+                    {
+                        <td>@Common.FormatNumber(item.TotalPrice, 0)  @Html.Raw(StaticRescouces.ResourceUser.Tien)</td>
+                    }
+                    else
+                    {
+                        <td>@Common.FormatNumber(item.TotalPrice / 24310, 0)  @Html.Raw(StaticRescouces.ResourceUser.Tien)</td>
+                    }
+                </tr>
+
+
+            }
+            <tr class="order-subtotal">
+                <td>@StaticRescouces.ResourceUser.tamtinh</td>
+                @if ((currentLanguage == "vi"))
+                {
+                    <td>@Common.FormatNumber(tongtien, 0)  @Html.Raw(StaticRescouces.ResourceUser.Tien)</td>
+                }
+                else
+                {
+                    <td>@Common.FormatNumber(tongtien / 24310, 0)  @Html.Raw(StaticRescouces.ResourceUser.Tien)</td>
+                }
+            </tr>
+            @if (ViewBag.vv !=0)
+            {
+                <tr class="order-product">
+                    <td>Áp mã giảm giá</td>
+                    <td>30%</td>
+                </tr>
+            }
+
+
+
+
+            <tr class="order-shipping">
+                <td colspan="2">
+                    <div class="shipping-amount">
+                        <span class="title">@StaticRescouces.ResourceUser.phivanchuyen</span>
+                        <span class="amount">$35.00</span>
+                    </div>
+                    <div class="input-group">
+                        <input type="radio" id="radio1" name="shipping" checked>
+                        <label for="radio1">@StaticRescouces.ResourceUser.mienphivanchuyen</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="radio" id="radio2" name="shipping">
+                        <label for="radio2">@StaticRescouces.ResourceUser.diaphuong</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="radio" id="radio3" name="shipping">
+                        <label for="radio3">@StaticRescouces.ResourceUser.tygiacodinh</label>
+                    </div>
+                </td>
+            </tr>
+            <tr class="order-total">
+                <td>@StaticRescouces.ResourceUser.tong</td>
+                @if (ViewBag.Cart != null)
+                            {
+                                decimal tt = ViewBag.TongAll;
+                                if ((currentLanguage == "vi"))
+                                {
+                        <td class="order-total-amount">@Common.FormatNumber(tt, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</td>
+                    }
+                    else
+                    {
+                        <td class="order-total-amount">@Common.FormatNumber(tt / 24310, 0)  @Html.Raw(StaticRescouces.ResourceUser.Tien)</td>
+                    }
+                }
+
+            </tr>
+
+
+        </tbody>
+    </table>
+}
+else
+{
+}
+
+

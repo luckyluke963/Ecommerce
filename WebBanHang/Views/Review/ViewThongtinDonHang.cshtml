@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<Models.EF.OrderDetail>
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">đơn giá</th>
+                <th scope="col">Tổng tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+               
+                <tr>
+                   
+
+                    <td>@item.Product.Title</td>
+                    @*<td>@(item.Status == 1 ? "Chưa thành toán" : "Đã thành toán")</td>
+                    <td>@item.TypePayment for @item.Quantity items</td>
+                    <td><a href="#" class="axil-btn view-btn" data-toggle="modal" data-target="#exampleModalCenter">Xem chi tiết</a></td>*@
+                   
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+
+}
+

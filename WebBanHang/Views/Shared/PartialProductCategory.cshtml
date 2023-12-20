@@ -1,0 +1,37 @@
+﻿@model List<Models.EF.ProductCategory>
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+<button class="header-department-text department-title">
+    <span class="icon"><i class="fal fa-bars"></i></span>
+    <span class="text">@StaticRescouces.ResourceUser.DanhMuc</span>
+</button>
+<nav class="department-nav-menu">
+    <button class="sidebar-close"><i class="fas fa-times"></i></button>
+    <ul class="nav-menu-list">
+
+        @foreach (var item in Model)
+        {
+            if ((currentLanguage == "vi"))
+            {
+                <li>
+                    <a href="#" class="nav-link has-megamenu">
+                        <span class="menu-icon"><img src="@item.Icon" alt="@item.Title"></span>
+                        <span class="menu-text">@item.Title</span>
+                    </a>
+                </li>
+            }
+            else if (currentLanguage == "en" )
+            {
+                <li>
+                    <a href="#" class="nav-link has-megamenu">
+                        <span class="menu-icon"><img src="@item.Icon" alt="@item.Title"></span>
+                        <span class="menu-text">@item.SeoTile</span>
+                    </a>
+                </li>
+            }
+        }
+
+    </ul>
+</nav>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Models.EF.ProductCategory>
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+<link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/vendor/font-awesome.css">
+<link rel="stylesheet" href="assets/css/vendor/flaticon/flaticon.css">
+<link rel="stylesheet" href="assets/css/vendor/slick.css">
+<link rel="stylesheet" href="assets/css/vendor/slick-theme.css">
+<link rel="stylesheet" href="assets/css/vendor/jquery-ui.min.css">
+<link rel="stylesheet" href="assets/css/vendor/sal.css">
+<link rel="stylesheet" href="assets/css/vendor/magnific-popup.css">
+<link rel="stylesheet" href="assets/css/vendor/base.css">
+<link rel="stylesheet" href="assets/css/style.min.css">
+@if (Model != null && Model.Any())
+{
+    <div class="categrie-product-activation slick-layout-wrapper--15 axil-slick-arrow  arrow-top-slide">
+
+        @foreach (var item in Model)
+        {
+            if ((currentLanguage == "vi"))
+            {
+                <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500">
+                    <a href="@item.Alias" style="text-decoration: none">
+                        <img class="img-fluid" src="@item.Icon" alt="product categorie">
+                        <h6 class="cat-title">@item.Title</h6>
+                    </a>
+                </div>
+            }
+            else if (currentLanguage == "en" )
+            {
+                <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500">
+                    <a href="@item.Alias" style="text-decoration: none">
+                        <img class="img-fluid" src="@item.Icon" alt="product categorie">
+                        <h6 class="cat-title">@item.SeoTile</h6>
+                    </a>
+                </div>
+            }
+        }
+
+
+    </div>
+}

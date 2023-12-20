@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Models.EF.Wishlist>
+@*@using PagedList.Mvc
+@using PagedList*@
+@{
+    Layout = null;
+}
+@*@if (Model != null && Model.Any())
+{
+
+    <ul class="cart-item-list">
+        @foreach (var item in Model)
+        {
+            <li class="cart-item">
+                <div class="item-img">
+                    <a href="/@item.Product.Alias-n@(item.ProductId)"><img src="@item.Product.Image" alt="@item.Product.Title"></a>
+
+                </div>
+                <div class="item-content">
+                    <div class="product-rating">
+                        <span class="icon">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="rating-number">(64)</span>
+                    </div>
+                    <h3 class="item-title"><a href="single-product-3.html">@item.Product.Title</a></h3>
+                    <div class="item-price"><span class="currency-symbol">$</span>@item.Product.Price</div>
+
+                </div>
+            </li>
+
+        }
+    </ul>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+}*@
+
+
+
+
+
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Hình ảnh</th>
+
+                    <th scope="col">Giá</th>
+
+                    <th scope="col">Xem chi tiết</th>
+                    <th style="width:100px" scope="col">Thêm vào giỏ hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <th scope="row">@item.Product.Title  </th>
+                        <td><img style="width: 100px; height:100px" src="@item.Product.Image" alt="@item.Product.Title"></td>
+
+                        <td>
+                            @if (item.Product.PriceSale > 0)
+                            {
+
+
+                                <span class="price current-price">@Models.Common.Common.FormatNumber(item.Product.PriceSale, 0) &#8363;</span>
+                            }
+                            else
+                            {
+
+                                <span class="price current-price">@Models.Common.Common.FormatNumber(item.Product.Price, 0) &#8363;</span>
+                            }
+                        </td>
+                        <td><a href="/chi-tiet/@item.Product.Alias-p@(item.Product.Id)" class=" btn btn-success btn-lg" >Xem chi tiết sản phẩm</a></td>
+                        <td><a href="#" class=" btn btn-danger btn-lg btnAddToCart"  data-id="@item.Product.Id">Thêm sản phẩm giỏ hàng</a></td>
+                    </tr>
+                }
+                </tbody>
+        </table>
+    </div>
+}

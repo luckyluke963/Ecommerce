@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Models.EF.ProductCategory>
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+@if (Model != null && Model.Any())
+{
+    <!-- Start Expolre Product Area  -->
+    <div class="axil-product-area bg-color-white axil-section-gap pb--0">
+        <div class="container">
+            <div class="product-area pb--20">
+                <div class="axil-isotope-wrapper">
+                    <div class="product-isotope-heading">
+                        <div class="section-title-wrapper">
+                            <span class="title-highlighter highlighter-primary"><i class="far fa-shopping-basket"></i>@StaticRescouces.ResourceUser.Cacsanphamcuachungtoi</span>
+                            <h2 class="title">@StaticRescouces.ResourceUser.Cacsanphammoive.</h2>
+                        </div>
+                        <div class="isotope-button">
+                            <button data-filter="*" class="is-checked"><span class="filter-text">@StaticRescouces.ResourceUser.TatCa</span></button>
+                            @foreach (var item in Model)
+                            {
+                                if ((currentLanguage == "vi"))
+                                {
+                                    <button data-filter=".@item.Alias" class=""><span class="filter-text">@item.Title</span></button>
+                                }
+                                else if (currentLanguage == "en" )
+                                {
+                                    <button data-filter=".@item.Alias" class=""><span class="filter-text">@item.SeoTile</span></button>
+                                }
+                              
+                            }
+
+
+
+                        </div>
+                    </div>
+                    <div class="row row--15 isotope-list">
+                        @Html.Action("Partial_ItemByCateId", "Products")
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-12 text-center mt--20 mt_sm--0">
+                        <a href="/san-pham" class="axil-btn btn-bg-lighter btn-load-more">@StaticRescouces.ResourceUser.Xemtatcacacsanpham</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Expolre Product Area  -->
+}

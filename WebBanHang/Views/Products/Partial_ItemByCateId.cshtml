@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Models.EF.Product>
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        var strImage = "";
+        var img = item.ProductImage.FirstOrDefault(x => x.IsDefaul);
+        if (img != null)
+        {
+            strImage = img.image;
+        }
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30 product @item.ProductCategory.Alias">
+            <div class="axil-product product-style-one">
+                <div class="thumbnail">
+                    <a href="/chi-tiet/@item.Alias-p@(item.Id)">
+                        <img data-sal="fade" data-sal-delay="100" data-sal-duration="1500" src="@strImage" alt="@item.Title">
+                    </a>
+                    <div class="product-hover-action">
+                        <ul class="cart-action">
+                            <li class="select-option"><a href="single-product-7.html" class="btnAddToCart" data-id="@item.Id">@StaticRescouces.ResourceUser.ThemGioHang</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <div class="inner">
+                        <h5 class="title"><a href="/chi-tiet/@item.Alias-p@(item.Id)">@item.Title<span class="verified-icon"><i class="fas fa-badge-check"></i></span></a></h5>
+                        <div class="product-price-variant">
+                            @*@if (item.PriceSale > 0)
+                                {
+
+                                    <span class="price old-price">@Models.Common.Common.FormatNumber(item.Price, 0) &#8363;</span>
+                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.PriceSale, 0) &#8363;</span>
+                                }
+                                else
+                                {
+
+                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.Price, 0) &#8363;</span>
+                                }*@
+                            @if ((currentLanguage == "vi"))
+                            {
+                                if (item.PriceSale > 0)
+                                {
+
+                                    <span class="price old-price">@Models.Common.Common.FormatNumber(item.Price, 0)  @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.PriceSale, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+                                }
+                                else
+                                {
+
+                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.Price, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+
+                                }
+                            }
+                            else
+                            {
+                                if (item.PriceSale > 0)
+                                {
+
+                                    <span class="price old-price">@Models.Common.Common.FormatNumber(item.Price / 24310, 0)  @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.PriceSale / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien);</span>
+                                }
+                                else
+                                {
+
+                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.Price / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+}

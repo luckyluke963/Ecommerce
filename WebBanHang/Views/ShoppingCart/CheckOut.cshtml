@@ -1,0 +1,304 @@
+﻿@model Models.ShopCart.OrderViewModel
+@{
+    ViewBag.Title = "Thanh Toán";
+}
+
+@if (ViewBag.CheckCart != null)
+{
+
+    <!-- Start Checkout Area  -->
+    <div class="axil-checkout-area axil-section-gap">
+        <div id="Show_success"></div>
+        <div class="container">
+            @Html.Action("Partial_CheckThanhToan", "ShoppingCart")
+        </div>
+    </div>
+    <!-- End Checkout Area  -->
+}
+
+else
+{
+    <div>
+        Bạn chưa có sản phẩm nào.Vui lòng quay lại trang <a href="/san-pham"> Sản phẩm </a> để mua hàng
+    </div>
+}
+@section scripts{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+
+    <script>
+        var user1 = {
+            init: function () {
+                user1.loadProvince();
+                user1.registerEvent();
+            },
+            registerEvent: function () {
+                $('#ddlProvince').off('change').on('change', function () {
+                    var id = $(this).val();
+                    if (id != '') {
+                        user1.loadDistrict(parseInt(id));
+                    } else {
+                        $('#ddlDistrict').html('');
+                    }
+                });
+                $('#ddlDistrict').off('change').on('change', function () {
+                    var id = $(this).val();
+                    if (id != '') {
+                        user1.LoadPrecinct(parseInt(id));
+                    } else {
+                        $('#ddlWard').html('');
+                    }
+                });
+            },
+            loadProvince: function () {
+                $.ajax({
+                    url: '/LoadProvice/LoadProvince',
+                    type: "POST",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                           /* var html = '<option value="">--Chọn tỉnh thành--</option>';*/
+                            var data = response.data;
+                            $.each(data, function (i, item) {
+                                html += '<option value="' + item.ID + '">' + item.Name + '</option>'
+                            });
+                            $('#ddlProvince').html(html);
+                        }
+                    }
+                })
+            },
+            loadDistrict: function (id) {
+                $.ajax({
+                    url: '/LoadProvice/LoadDistricts',
+                    type: "POST",
+                    data: { provinceID: id },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            var html = '<option value="">--Chọn quận huyện--</option>';
+                            var data = response.data;
+                            $.each(data, function (i, item) {
+                                html += '<option value="' + item.ID + '">' + item.Name + '</option>'
+                            });
+                            $('#ddlDistrict').html(html);
+                        }
+                    }
+                })
+            },
+            LoadPrecinct: function (id) {
+                $.ajax({
+                    url: '/LoadProvice/LoadPrecinct',
+                    type: "POST",
+                    data: { districtID: id },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            var html = '<option value="">--Chọn phường xã--</option>';
+                            var data = response.data;
+                            $.each(data, function (i, item) {
+                                html += '<option value="' + item.ID + '">' + item.Name + '</option>'
+                            });
+                            $('#ddlWard').html(html);
+                        }
+                    }
+                })
+            }
+        }
+        user1.init();
+    </script>
+
+    <script>
+        var user2 = {
+            init: function () {
+                user2.loadProvince();
+                user2.registerEvent();
+            },
+            registerEvent: function () {
+                $('#ddlProvince1').off('change').on('change', function () {
+                    var id = $(this).val();
+                    if (id != '') {
+                        user2.loadDistrict(parseInt(id));
+                    } else {
+                        $('#ddlDistrict1').html('');
+                    }
+                });
+                $('#ddlDistrict1').off('change').on('change', function () {
+                    var id = $(this).val();
+                    if (id != '') {
+                        user2.LoadPrecinct(parseInt(id));
+                    } else {
+                        $('#ddlWard1').html('');
+                    }
+                });
+            },
+            loadProvince: function () {
+                $.ajax({
+                    url: '/LoadProvice/LoadProvince',
+                    type: "POST",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            var html = '<option value="">--Chọn tỉnh thành--</option>';
+                            var data = response.data;
+                            $.each(data, function (i, item) {
+                                html += '<option value="' + item.ID + '">' + item.Name + '</option>'
+                            });
+                            $('#ddlProvince1').html(html);
+                        }
+                    }
+                })
+            },
+            loadDistrict: function (id) {
+                $.ajax({
+                    url: '/LoadProvice/LoadDistricts',
+                    type: "POST",
+                    data: { provinceID: id },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            var html = '<option value="">--Chọn quận huyện--</option>';
+                            var data = response.data;
+                            $.each(data, function (i, item) {
+                                html += '<option value="' + item.ID + '">' + item.Name + '</option>'
+                            });
+                            $('#ddlDistrict1').html(html);
+                        }
+                    }
+                })
+            },
+            LoadPrecinct: function (id) {
+                $.ajax({
+                    url: '/LoadProvice/LoadPrecinct',
+                    type: "POST",
+                    data: { districtID: id },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status == true) {
+                            var html = '<option value="">--Chọn phường xã--</option>';
+                            var data = response.data;
+                            $.each(data, function (i, item) {
+                                html += '<option value="' + item.ID + '">' + item.Name + '</option>'
+                            });
+                            $('#ddlWard1').html(html);
+                        }
+                    }
+                })
+            }
+        }
+        user2.init();
+    </script>
+
+
+
+
+
+
+    <script>
+        paypal.Button.render({
+            env: 'sandbox',
+            client: {
+                sandbox: 'AQrTCDoYDFG8GMMBt9FIg31pfR--GCaFUzRP65WoaOf0S3incyXWUFmIU8GvpJmr9y32WXY8BwN4DGeV'
+            },
+
+            locale: 'en_US',
+            style: {
+                size: 'small',
+                color: 'gold',
+                shape: 'pill'
+            },
+            commit: true,
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    transaction: [{
+                        amount: {
+                            amount: {
+                                total: 0,
+                                currency: 'USD'
+                            }
+                        }
+                    })
+            },
+            onAuthorize: function (data, actions) {
+                console.log("payment executed");
+            }
+        }, '#paypal-btn')
+    </script>
+
+
+
+    <script>
+        function OnSuccess(rs) {
+            if (!rs.Success) {
+                $('#Show_success').html("Bạn mua hàng thất bại! Xin vui lòng thử lại");
+            }
+            else {
+                location.href = "/ShoppingCart/CheckOutSuccess";
+            }
+        }
+
+
+
+        $(document).ready(function () {
+            $('body').on('change', '#drTypePayment input[type="radio"]', function () {
+                var type = $(this).val();
+
+                if (type == "2") {
+                    $('#load_form_payment').show();
+                }
+                else if (type != "2") {
+                    $('#load_form_payment').hide();
+                }
+            });
+
+
+            $('#myForm').validate({
+                rules: {
+                    'CustomerName': {
+                        required: true
+                    },
+                    'Phone': {
+                        required: true
+                    },
+                    'Address': {
+                        required: true
+                    },
+                    'Email': {
+                        required: true,
+                        email: true
+                    }
+
+                },
+                messages: {
+                    'CustomerName': 'Bạn không để trống trường này',
+                    'Phone': 'Bạn không để trống trường này',
+                    'Address': 'Bạn khổng để trống trường này',
+                    'Email': 'Bạn khổng để trống trường này',
+                },
+                errorPlacement: function (error, element) {
+                    if (element.attr("name") === "CustomerName") {
+                        error.appendTo("#customerName-error"); // Sử dụng ID hoặc class của phần tử chứa thông báo lỗi
+                    }
+                    else if (element.attr("name") === "Address") { // Update the condition for the Address field
+                        error.appendTo("#company-name-error"); // Use the correct ID of the error element
+                    }
+                    else if (element.attr("name") === "Phone") { // Update the condition for the Address field
+                        error.appendTo("#Phone-name-error"); // Use the correct ID of the error element
+                    }
+                    else if (element.attr("name") === "Email") { // Update the condition for the Address field
+                        error.appendTo("#Email-name-error"); // Use the correct ID of the error element
+                    }
+                    else {
+                        error.insertAfter(element);
+                    }
+                },
+
+            });
+        });
+
+
+
+    </script>
+}

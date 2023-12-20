@@ -1,0 +1,164 @@
+﻿@model Models.EF.Contact
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main-wrapper">
+    <!-- Start Breadcrumb Area  -->
+    <div class="axil-breadcrumb-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="inner">
+                        <ul class="axil-breadcrumb">
+                            <li class="axil-breadcrumb-item"><a href="/">@StaticRescouces.ResourceUser.Trangchu</a></li>
+                            <li class="separator"></li>
+                            <li class="axil-breadcrumb-item active" aria-current="page">@StaticRescouces.ResourceUser.lienhe</li>
+                        </ul>
+                        <h1 class="title"@StaticRescouces.ResourceUser.lienvoichungtoi></h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4">
+                    <div class="inner">
+                        <div class="bradcrumb-thumb">
+                       
+                            <img src="~/Content/User/assets/images/product/product-45.png" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb Area  -->
+    <!-- Start Contact Area  -->
+    <div class="axil-contact-page-area axil-section-gap">
+        <div class="container">
+            <div class="axil-contact-page">
+                <div class="row row--30">
+                    <div class="col-lg-8">
+                        <div class="contact-form">
+                            <h3 class="title mb--10">@StaticRescouces.ResourceUser.chungtoiratmongnhanduochoiamtuban.</h3>
+                            <p>@StaticRescouces.ResourceUser.neubanconhungsanpham.</p>
+                            <form class="axil-contact-form">
+                                <div class="row row--10">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="contact-name">@StaticRescouces.ResourceUser.hovaten <span>*</span></label>
+                                            <input type="text"  id="txtName">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="contact-phone">@StaticRescouces.ResourceUser.sodienthoai <span>*</span></label>
+                                            <input type="text" id="txtMobile">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="contact-email">E-mail <span>*</span></label>
+                                            <input type="email"  id="txtEmail">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="contact-message">@StaticRescouces.ResourceUser.tinnhancuaban</label>
+                                            <textarea  id="txtContent" cols="1" rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group mb--0">
+                                            <button id="btnSend"  type="submit"  class="axil-btn btn-bg-primary">@StaticRescouces.ResourceUser.guiphanhoi</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="contact-location mb--40">
+                            <h4 class="title mb--20">@StaticRescouces.ResourceUser.cuahangcuachungtoi</h4>
+                            <span class="address mb--20">@Html.Raw(Model.Content)</span>
+                            <span class="phone">@StaticRescouces.ResourceUser.sodienthoai: @Model.Message</span>
+                            <span class="email">Email: @Model.Email</span>
+                        </div>
+                        <div class="contact-career mb--40">
+                            <h4 class="title mb--20">@StaticRescouces.ResourceUser.quantam</h4>
+                            <p>@StaticRescouces.ResourceUser.thayvimuathu .</p>
+                        </div>
+                        <div class="opening-hour">
+                            <h4 class="title mb--20">@StaticRescouces.ResourceUser.giomocua:</h4>
+                            <p>
+                                @StaticRescouces.ResourceUser.thu2denchu7
+                                <br> @StaticRescouces.ResourceUser.chunhat
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start Google Map Area  -->
+            <div class="axil-google-map-wrap axil-section-gap pb--0">
+                <div class="mapouter">
+                    <div class="gmap_canvas">
+                        @*<iframe width="1080" height="500" id="gmap_canvas"></iframe>*@
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Google Map Area  -->
+        </div>
+    </div>
+    <!-- End Contact Area  -->
+</main>
+
+
+
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet" />
+
+<script>
+    // Where you want to render the map.
+    var element = document.getElementById('map');
+
+    // Height has to be set. You can do this in CSS too.
+     element.style = 'height:500px;width: 1080px;';
+    
+    // Create Leaflet map on map element.
+    var map = L.map(element).setView([10.981695, 106.675449],16);
+
+
+    
+    // Add OSM tile layer to the Leaflet map.
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Target's GPS coordinates.
+
+    var js = @Html.Raw(Json.Encode(Model.Name));
+   
+    js = js.toString();
+    L.marker([@Model.Long, @Model.Lat]).addTo(map).bindPopup(js);
+    //10.981742, 106.674089
+    //// Set map's center to target with zoom 14.
+    //map.setView(target, 14);
+
+    //// Place a marker on the same location.
+    //L.marker(target).addTo(map);
+
+
+
+</script>
+
+
+
+
+
+
+
+@section scripts{
+        
+    <script src="~/Content/User/contactController.js"></script>
+
+}
+

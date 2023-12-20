@@ -1,0 +1,28 @@
+﻿<!-- Thêm thư viện Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="/assets/client/js/controller/contactController.js"></script>
+<script>
+    // Khởi tạo bản đồ sử dụng Leaflet
+    var map = L.map('mapCanvas').setView([21.046300, 105.793266], 18);
+
+    // Thêm lớp dữ liệu OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var contentString = '@Html.Raw(Model.Content)';
+
+    // Tạo một pop-up với nội dung
+    var popup = L.popup()
+        .setLatLng([21.046300, 105.793266])
+        .setContent('1');
+
+    // Tạo một marker và thêm pop-up khi được nhấp
+    var marker = L.marker([21.046300, 105.793266]).addTo(map);
+    marker.bindPopup(popup);
+
+    // Không cần sự kiện "load" với Leaflet
+
+    // Bạn có thể thêm thêm điều khiển, lớp, và chức năng tương tự như với Google Maps.
+</script>

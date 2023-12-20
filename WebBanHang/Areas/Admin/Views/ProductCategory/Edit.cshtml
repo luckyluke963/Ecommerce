@@ -1,0 +1,159 @@
+﻿@model Models.EF.ProductCategory
+@{
+    ViewBag.Title = StaticRescouces.Resources.chinhsuadanhmucsanpham;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/home" class="nav-link">@StaticRescouces.ResourceUser.Trangchu</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/category" class="nav-link">@StaticRescouces.Resources.danhmucloaisanpham</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">@StaticRescouces.Resources.sua</a>
+        </li>
+        @using (Html.BeginForm("ChangeCulture", "BaseAdmin"))
+        {
+            <div class="dropdown">
+                <button id="dropdownCulture" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @StaticRescouces.Resources.tiengadmin
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownCulture">
+                    @foreach (var culture in new[]
+                    {
+                new {value = "vi", text= StaticRescouces.ResourceUser.VietNamese},
+                new {value = "en", text= StaticRescouces.ResourceUser.English},
+            })
+                    {
+                        <button type="submit" class="dropdown-item" name="ddlCulture" value="@culture.value">@culture.text</button>
+                    }
+                </div>
+            </div>
+            @Html.Hidden("returnUrl", Request.RawUrl)
+        }
+    </ul>
+
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                @*<h1>Chỉnh sửa danh mục sản phẩm</h1>*@
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">@StaticRescouces.Resources.danhmucloaisanpham</a></li>
+                    <li class="breadcrumb-item active">@StaticRescouces.Resources.sua</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@StaticRescouces.Resources.thongtinchinhsualoaidanhmuc</h3>
+
+
+        </div>
+        <div class="card-body">
+            @if (Model != null)
+            {
+                <div class="bs-stepper-content">
+                    @using (Html.BeginForm("Edit", "ProductCategory", FormMethod.Post, new { }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(x => x.Id)
+                      
+                        @Html.HiddenFor(x => x.CreateDate)
+                        <!-- your steps content here -->
+                        <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">@StaticRescouces.Resources.tenloai</label>
+                                @Html.TextBoxFor(x => x.Title, new { @class = "form-control", placeholder = @StaticRescouces.Resources.tenloai })
+                                @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+                            </div>
+                            @*<div class="form-group">
+                                <label for="exampleInputEmail1">Alias</label>
+                                @Html.TextBoxFor(x => x.Alias, new { @class = "form-control", placeholder = "Alias" })
+                                @Html.ValidationMessageFor(x => x.Alias, null, new { @class = "text-danger" })
+                            </div>*@
+                            <div class="form-group">
+                                <label for="exampleInputFile">@StaticRescouces.Resources.icon</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        @Html.TextBoxFor(x => x.Icon, new { @id = "txtImage", @class = "form-control" })
+                                    </div>
+                                    <div class="input-group-append">
+                                        <input type="button" value="@StaticRescouces.Resources.icon" onclick="BrowseSer('txtImage');" />
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                <label for="exampleInputPassword1">Seo Title</label>
+                                @Html.TextAreaFor(x => x.SeoTile, new { @class = "form-control" })
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Seo Description</label>
+                                @Html.TextAreaFor(x => x.SeoDescription, new { @class = "form-control" })
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Seo Keywords</label>
+                                @Html.TextAreaFor(x => x.SeoKeywords, new { @class = "form-control" })
+
+                            </div>*@
+                            <div class="form-group">
+                                <a href="/admin/category" class="btn btn-danger">@StaticRescouces.Resources.quaylai</a>
+                                <button type="submit" class="btn btn-primary">@StaticRescouces.Resources.luu</button>
+                            </div>
+
+                        </div>
+                    }
+
+
+                </div>
+            }
+            </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace('txtDetail', {
+                customConfig: '/Content/ckeditor/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+        function BrowseSer(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                document.getElementById(field).value = fileUrl;
+            };
+            finder.popup();
+        }
+    </script>
+
+}

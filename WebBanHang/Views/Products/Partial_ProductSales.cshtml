@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Models.EF.Product>
+@{
+    // Assuming you have a variable to store the current language (e.g., "currentLanguage")
+    string currentLanguage = Session[Models.CommonConstants.CurrentCulture].ToString();
+}
+<div class="axil-new-arrivals-product-area fullwidth-container bg-color-white axil-section-gap pb--0">
+    <div class="container ml--xxl-0">
+        <div class="product-area pb--50">
+            <div class="section-title-wrapper">
+                <span class="title-highlighter highlighter-primary"><i class="far fa-shopping-basket"></i>@StaticRescouces.ResourceUser.TrongTuanNay</span>
+                <h2 class="title">@StaticRescouces.ResourceUser.HangKhuyenmai</h2>
+            </div>
+            <div class="new-arrivals-product-activation slick-layout-wrapper--15 axil-slick-arrow  arrow-top-slide">
+                @if (Model != null && Model.Any())
+                {
+
+
+
+
+
+
+
+
+                    foreach (var item in Model)
+                    {
+                        var strImage = "";
+                        var img = item.ProductImage.FirstOrDefault(x => x.IsDefaul);
+                        if (img != null)
+                        {
+                            strImage = img.image;
+                        }
+
+
+
+                        <!-- End .slick-single-layout -->
+                        <div class="slick-single-layout">
+                            <div class="axil-product product-style-four">
+                                <div class="thumbnail">
+                                    <a href="/chi-tiet/@item.Alias-p@(item.Id)">
+                                        <img data-sal="fade" data-sal-delay="300" data-sal-duration="1500" src="@strImage" alt="Product Images">
+                                    </a>
+                                    <div class="label-block label-right">
+                                        @if (item.Price > 0)
+                                        {
+
+                                            <div class="product-badget"> @(Math.Round((double)((item.Price - item.PriceSale) / item.Price * 100), 0))% @StaticRescouces.ResourceUser.Giam</div>
+                                        }
+                                    </div>
+                                    <div class="product-hover-action">
+                                        <ul class="cart-action">
+                                            @*<li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>*@
+                                            <li class="select-option"><a href="#" class="btnAddToCart" data-id="@item.Id">@StaticRescouces.ResourceUser.ThemGioHang</a></li>
+
+                                            <li class="quickview"><a href="/chi-tiet/@item.Alias-p@(item.Id)"><i class="far fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <div class="inner">
+                                        <h5 class="title"><a href="/chi-tiet/@item.Alias-p@(item.Id)">@item.Title</a></h5>
+                                        <div class="product-price-variant">
+                                            @if ((currentLanguage == "vi"))
+                                            {
+                                                if (item.PriceSale > 0)
+                                                {
+
+                                                    <span class="price old-price">@Models.Common.Common.FormatNumber(item.Price, 0)  @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+                                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.PriceSale, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+                                                }
+                                                else
+                                                {
+
+                                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.Price, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (item.PriceSale > 0)
+                                                {
+
+                                                    <span class="price old-price">@Models.Common.Common.FormatNumber(item.Price / 24310, 0)  @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+                                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.PriceSale / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien);</span>
+                                                }
+                                                else
+                                                {
+
+                                                    <span class="price current-price">@Models.Common.Common.FormatNumber(item.Price / 24310, 0) @Html.Raw(StaticRescouces.ResourceUser.Tien)</span>
+
+                                                }
+                                            }
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End .slick-single-layout -->
+                        }
+
+
+
+
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>

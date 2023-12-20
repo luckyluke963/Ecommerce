@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Models.EF.News>
+@if (Model != null && Model.Any())
+{
+    <div class="axil-section-gap">
+        <div class="container">
+            <div class="section-title-wrapper section-title-center">
+                <span class="title-highlighter highlighter-primary"><i class="fas fa-fire"></i>@StaticRescouces.ResourceUser.BaiDangThuongXuyen</span>
+                <h3 class="title">@StaticRescouces.ResourceUser.Baivietvesanpham</h3>
+            </div>
+            <div class="row g-5">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4">
+                        <div class="content-blog blog-grid">
+                            <div class="inner">
+                                <div class="thumbnail">
+                                    <a href="/@item.Alias-n@(item.Id)">
+                                        <img src="@item.Image" alt="Blog Images">
+                                    </a>
+                                    <div class="blog-category">
+                                        <a href="/@item.Alias-n@(item.Id)">@StaticRescouces.ResourceUser.Docthem</a>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <h5 class="title"><a href="blog-details.html">@item.Title</a></h5>
+                                    <div class="read-more-btn">
+                                        <a class="axil-btn right-icon" href="/@item.Alias-n@(item.Id)">@StaticRescouces.ResourceUser.Xemchitiet<i class="fal fa-long-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+}
